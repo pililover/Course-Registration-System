@@ -26,7 +26,7 @@ void add_semester(schoolyear &school_year){
 	cout<<"nhap nam muon hoc them hoc ki";
 	cin>>ss;
 	schoolyear* year_need_add_semester=school_year;
-	while(school_year->string year_name!=ss) year_need_add_semester=year_need_add_semester->next;
+	while(year_need_add_semester->string year_name!=ss) year_need_add_semester=year_need_add_semester->next;
 	if(!year_need_add_semester) cout<<"nam hoc muon them vao hien khong co", return;
 	
 	cout<<"Nhap hoc ki muon them vao";
