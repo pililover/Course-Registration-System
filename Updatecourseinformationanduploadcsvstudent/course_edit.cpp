@@ -5,14 +5,17 @@
 
 using namespace std;
 
-struct Student
+struct student
 {
-    int student_id;
-    string first_name;
-    string last_name;
+    string student_num;
+    string studentID;
+    string firstname;
+    string lastname;
     string gender;
-    string birth;
-    string social_id;
+    string birthday;
+    string socialID;
+    double score;
+    student *next;
 };
 
 // Struct to represent a course
@@ -26,7 +29,7 @@ struct Course
     string teacher_name;
     string day_of_week;
     string session;
-    Student *enrolled_students;
+    student *enrolled_students;
     int num_students;
     Course *next;
 };
@@ -58,15 +61,9 @@ struct user
     string fullname;
 };
 
-struct node_student
-{
-    Student* data;
-    node_student* next;
-};
+student* head = nullptr;
 
-node_student* head = nullptr;
-
-void upload_csv_stu(node_student* &head){
+void upload_csv_stu(student* &head){
     string csv;
     cout<<"Input the csv file name (eg: name.csv): ";
     cin>>csv;
@@ -78,11 +75,11 @@ void upload_csv_stu(node_student* &head){
     }
     else{
         //Variables for students in course
-        head = new node_student;
-        node_student* temp = head;
+        head = new student;
+        student* temp = head;
 
-        int temp_student_id;
-        string str_student_id;
+        string temp_student_num;
+        string temp_student_id;
         string temp_first_name;
         string temp_last_name;
         string temp_gender;
@@ -91,25 +88,27 @@ void upload_csv_stu(node_student* &head){
 
         while (!in.eof()){
             //Getting students in that from csv file
-            getline(in, str_student_id,',');
-            temp_student_id = stoi(str_student_id);
+            getline(in, temp_student_num,',');
+            getline(in, temp_student_id,',');
             getline(in, temp_first_name,',');
             getline(in, temp_last_name,',');
             getline(in, temp_gender,',');
             getline(in, temp_birth,',');
             getline(in, temp_social_id,',');
         
-            head->data->student_id = temp_student_id;
-            head->data->first_name = temp_first_name;
-            head->data->last_name = temp_last_name;
-            head->data->gender = temp_gender;
-            head->data->birth = temp_birth;
-            head->data->social_id = temp_social_id;
+            head->student_num = temp_student_num;
+            head->studentID = temp_student_id;
+            head->firstname = temp_first_name;
+            head->lastname = temp_last_name;
+            head->gender = temp_gender;
+            head->birthday = temp_birth;
+            head->socialID = temp_social_id;
 
-            head->next=new node_student;
+            head->next=new student;
             head=head->next;
 
-            cout<<temp_student_id<<", "
+            cout<<temp_student_num<<", "
+                <<temp_student_id<<", "
                 <<temp_first_name<<", "
                 <<temp_last_name<<", "
                 <<temp_gender<<", "
@@ -141,7 +140,7 @@ void update_course(Course the_course){
     int temp_maxstudent = 50;
     string temp_day_of_week;
     string temp_session;
-    Student *senrolled_student;
+    student *senrolled_student;
     string str_num_student;
     int temp_num_students;
 
@@ -160,35 +159,36 @@ void update_course(Course the_course){
     temp_num_students = stoi(str_num_student);
 
     //Variables for students in course
-    head = new node_student;
-    node_student* temp = head;
+    head = new student;
+    student* temp = head;
 
-    int temp_student_id;
-    string str_student_id;
+    string temp_student_num;
+    string temp_student_id;
     string temp_first_name;
     string temp_last_name;
     string temp_gender;
     string temp_birth;
     string temp_social_id;
-    
-    //Getting students in that from csv file
-    while(!in.eof()){
-        getline(in, str_student_id,',');
-        temp_student_id = stoi(str_student_id);
+
+    while (!in.eof()){
+        //Getting students in that from csv file
+        getline(in, temp_student_num,',');
+        getline(in, temp_student_id,',');
         getline(in, temp_first_name,',');
         getline(in, temp_last_name,',');
         getline(in, temp_gender,',');
         getline(in, temp_birth,',');
         getline(in, temp_social_id,',');
         
-        head->data->student_id = temp_student_id;
-        head->data->first_name = temp_first_name;
-        head->data->last_name = temp_last_name;
-        head->data->gender = temp_gender;
-        head->data->birth = temp_birth;
-        head->data->social_id = temp_social_id;
+        head->student_num = temp_student_num;
+        head->studentID = temp_student_id;
+        head->firstname = temp_first_name;
+        head->lastname = temp_last_name;
+        head->gender = temp_gender;
+        head->birthday = temp_birth;
+        head->socialID = temp_social_id;
 
-        head->next=new node_student;
+        head->next=new student;
         head=head->next;
     }
     head = temp;
@@ -257,31 +257,34 @@ void update_course(Course the_course){
 
             case 9:
                 if (temp_num_students < temp_maxstudent){
-                    node_student* temp = head;
+                    student* temp = head;
                     while (temp->next){
                         temp = temp->next;
                     }
-                    temp->next = new node_student;
+                    temp->next = new student;
                     temp = temp->next;
-
+                    
+                    cout<<"Enter the student number: ";
+                    cin>>temp_student_num;
+                    temp->student_num = temp_student_num;
                     cout<<"Enter the student ID: ";
                     cin>>temp_student_id;
-                    temp->data->student_id = temp_student_id;
+                    temp->studentID = temp_student_id;
                     cout<<"Enter the student first name: ";
                     cin>>temp_first_name;
-                    temp->data->first_name = temp_first_name;
+                    temp->firstname = temp_first_name;
                     cout<<"Enter the student last name: ";
                     cin>>temp_last_name;
-                    temp->data->last_name = temp_last_name;
+                    temp->lastname = temp_last_name;
                     cout<<"Enter the student gender: ";
                     cin>>temp_gender;
-                    temp->data->gender = temp_gender;
+                    temp->gender = temp_gender;
                     cout<<"Enter the student date of birth: ";
                     cin>>temp_birth;
-                    temp->data->birth = temp_birth;
+                    temp->birthday = temp_birth;
                     cout<<"Enter the student social ID: ";
                     cin>>temp_social_id;
-                    temp->data->social_id = temp_social_id;
+                    temp->socialID = temp_social_id;
 
                     temp->next = nullptr;
 
@@ -293,14 +296,13 @@ void update_course(Course the_course){
                 cout<<"Enter the student ID: ";
                 cin>>temp_student_id;
 
-                node_student* temp = head;
-                while (temp->next && temp->next->data->student_id != temp_student_id){
+                student* temp = head;
+                while (temp->next && temp->next->studentID != temp_student_id){
                     temp = temp->next;
                 }
-                if (temp->next && temp->next->data->student_id == temp_student_id){
-                    node_student* cur = temp->next;
+                if (temp->next && temp->next->studentID == temp_student_id){
+                    student* cur = temp->next;
                     temp->next = cur->next;
-                    delete cur->data;
                     delete cur;
                 }
 
@@ -338,24 +340,33 @@ void update_course(Course the_course){
             <<temp_session<<','
             <<temp_num_students<<','<<endl;
 
-        node_student* cur = head;
+        student* cur = head;
         while (cur != nullptr){
-            out<<cur->data->student_id<<','
-                <<cur->data->first_name<<','
-                <<cur->data->last_name<<','
-                <<cur->data->gender<<','
-                <<cur->data->birth<<','
-                <<cur->data->social_id<<',';
+            out<<cur->student_num<<','
+                <<cur->studentID<<','
+                <<cur->firstname<<','
+                <<cur->lastname<<','
+                <<cur->gender<<','
+                <<cur->birthday<<','
+                <<cur->socialID<<',';
             cur = cur->next;
         }
     }
 
     while (head != nullptr){
-        node_student* cur = head;
+        student* cur = head;
         head = head->next;
-        delete cur->data;
         delete cur;
     }
 
     out.close();
+
+    if (flag == 1){
+        int n;
+        n = output_course.length();
+        char* temp = new char[n+1];
+        strcpy(temp, output_course.c_str());
+        remove(temp);
+        delete[] temp;
+    }
 }
