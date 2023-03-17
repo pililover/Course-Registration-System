@@ -47,7 +47,7 @@ void import_student_csv(student* &studentHead, student* &cur){
         getline(in, cur->lastname, ',');
         getline(in, cur->gender, ',');
         getline(in, cur->birthday, ',');
-        getline(in, cur->socialID, ',');
+        getline(in, cur->socialID, '\n');
         cur->next=NULL;
         cur = cur->next;
     } 
@@ -67,7 +67,7 @@ void input_student(student* &cur){
     cur = cur->next;
 }
 
-void create_class(Class* &classHead, Class* &year){
+void create_class(Class* &classHead){
     Class *tmp; 
     int n;
     cout<<"Enter the number of classes: "; cin>>n;
@@ -80,7 +80,6 @@ void create_class(Class* &classHead, Class* &year){
         tmp->studentHead=NULL;
         tmp=tmp->next;
     }
-    year = classHead;
 }
 
 void delete_student(student* &studentHead){
