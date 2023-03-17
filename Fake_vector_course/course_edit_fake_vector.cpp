@@ -35,7 +35,7 @@ void push_back(string_vectors *&arr, string value)
 {
     if (arr->size == arr->capacity)
     {
-        int new_capacity = (arr->capacity == 0) ? 1 : arr->capacity * 2;
+        int new_capacity = (arr->capacity == 0) ? 1 : arr->capacity + 15;
         resize(arr, new_capacity);
     }
     arr->data[arr->size] = value;
