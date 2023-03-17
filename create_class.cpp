@@ -51,6 +51,7 @@ void import_student_csv(student* &studentHead, student* &cur){
         cur->next=NULL;
         cur = cur->next;
     } 
+    in.close();
 } 
 
 void input_student(student* &cur){
