@@ -167,14 +167,11 @@ int main()
         }
         }
     } while (op != 0);
-    for (int i = 0; i < school_year->class_num; i++)
+    for (int i = 0; i < school_year->data_classes->student_capacity; i++)
     {
         delete[] school_year->data_classes[i].data_student;
     }
-    for (int i = 0; i < school_year->class_num; i++)
-    {
-        delete[] school_year[i].data_classes;
-    }
-    delete[] school_year;
+    delete[] school_year->data_classes;
+    delete school_year;
     return 0;
 }
