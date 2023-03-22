@@ -5,36 +5,28 @@
 
 using namespace std;
 
-struct string_vectors
-{
+struct string_vectors{
     string* data;
     int size;
     int capacity;
 };
 
-void init(string_vectors *&arr)
-{
+void init(string_vectors *&arr){
     arr->data = NULL;
     arr->size = 0;
     arr->capacity = 0;
 }
 
-void resize(string_vectors *&arr, int new_capacity)
-{
+void resize(string_vectors *&arr, int new_capacity){
     string *new_data = new string[new_capacity];
-    for (int i = 0; i < arr->size; i++)
-    {
-        new_data[i] = arr->data[i];
-    }
+    for (int i = 0; i < arr->size; i++)   new_data[i] = arr->data[i];
     delete[] arr->data;
     arr->data = new_data;
     arr->capacity = new_capacity;
 }
 
-void push_back(string_vectors *&arr, string value)
-{
-    if (arr->size == arr->capacity)
-    {
+void push_back(string_vectors *&arr, string value){
+    if (arr->size == arr->capacity){
         int new_capacity = (arr->capacity == 0) ? 1 : arr->capacity + 15;
         resize(arr, new_capacity);
     }
@@ -42,10 +34,8 @@ void push_back(string_vectors *&arr, string value)
     arr->size++;
 }
 
-void pop_back(string_vectors *&arr)
-{
-    if (arr->size > 0)
-    {
+void pop_back(string_vectors *&arr){
+    if (arr->size > 0){
         arr->size--;
         if (arr->size * 4 <= arr->capacity)
         {
@@ -89,9 +79,7 @@ void upload_csv_stu(student &upload){
 
     ifstream in(csv);
 
-    if (!in.is_open()){
-        cout<<"Canot open file!"<<endl;
-    }
+    if (!in.is_open()) cout<<"Canot open file!"<<endl;
     else{
         //Variables for students in course
         init(upload.student_num);
