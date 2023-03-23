@@ -136,6 +136,11 @@ void update_course(){
 
     ifstream in(course_input);
 
+    if (!in)
+    {
+        cout << "Cannot open file" << endl;
+        return;
+    }
     //Variables for course information
     string temp_courseID;
     string temp_courseName;
@@ -191,7 +196,7 @@ void update_course(){
         getline(in, temp_last_name,',');
         getline(in, temp_gender,',');
         getline(in, temp_birth,',');
-        getline(in, temp_social_id,',');
+        getline(in, temp_social_id,'\n');
         
         push_back(course_students.student_num, temp_student_num);
         push_back(course_students.studentID, temp_student_id);
@@ -331,7 +336,7 @@ void update_course(){
                 break;
 
             default:
-                cout<<"Invalid input! Please enter an option.";
+                cout<<"Invalid input! Please enter another option.";
                 break;
         }
     }
@@ -358,7 +363,7 @@ void update_course(){
                 <<course_students.lastname->data[n]<<','
                 <<course_students.gender->data[n]<<','
                 <<course_students.birthday->data[n]<<','
-                <<course_students.socialID->data[n]<<',';
+                <<course_students.socialID->data[n]<<'\n';
         }
     }
 
