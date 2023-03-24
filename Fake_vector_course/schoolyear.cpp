@@ -30,6 +30,7 @@ struct Course
 
 struct Semester
 {
+    Course *data_course;
     int semester_id;
     string start_day;
     string end_day;
@@ -47,6 +48,7 @@ struct SchoolYear
 {
     string year_name;
     Classes *data_classes;
+    Semester *data_semester;
     int class_num;
     int class_capacity;
 };
