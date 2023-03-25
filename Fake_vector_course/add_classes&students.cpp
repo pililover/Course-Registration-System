@@ -101,7 +101,7 @@ void view_class_in_schoolyear(SchoolYear *school_year)
 }
 
 
-void import_student_csv(Classes* &data_classes) {
+void import_student_csv_to_class(Classes* &data_classes) {
 	ifstream in("student.csv");
 	if(!in.is_open()) {
 		cout<<"Can not open file!"<<endl;
@@ -141,7 +141,7 @@ void input_student(Classes* &data_classes) {
 	push_back_student(data_classes, tmp);
 }
 
-void add_classes(SchoolYear* &school_year) {	
+void add_classes_to_schoolyear(SchoolYear* &school_year) {	
     Classes *tmp;
     init_class(tmp);
     cout<<"Class name: ";
@@ -156,7 +156,7 @@ void add_classes(SchoolYear* &school_year) {
 	}
 	while(x==1 || x==2) {
 		cin.ignore();
-		if(x==1) import_student_csv(tmp);
+		if(x==1) import_student_csv_to_class(tmp);
 		if(x==2) input_student(tmp);
 		cout<<"Do you want to add more students?"<<endl;
 		cout<<"Import file (1)    Input a student (2)    No (0)"<<endl;
@@ -181,7 +181,7 @@ int main()
     int x;
     do
     {
-        add_classes(school_year);
+        add_classes_to_schoolyear(school_year);
         cout<<"Do you want to add more classes? Yes(1) / No(0)    ";
         cin>>x;
         while(x!=1 && x!=0)
