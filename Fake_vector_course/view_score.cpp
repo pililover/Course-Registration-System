@@ -60,29 +60,27 @@ struct SchoolYear{
     Semester *data_semester3=nullptr ;
     int class_num;
     int class_capacity;
-    int semester1_size;
-    int semester2_size;
-    int semester3_size;
 };
 
 //The show variable is student ID value
-void show_score_semester_student(Semester semester, string show){
+//This function output the score of a semester to csv file
+void show_score_semester_student(Semester* semester, string show){
     string temp = show + "_scores.csv";
     ofstream in(temp, ios::app);
 
     //The first line in csv is the courses names
-    for (int i = 0; i < semester.size_course - 1; i++){
-        in<<semester.data_course[i].course_name<<',';
+    for (int i = 0; i < semester->size_course - 1; i++){
+        in<<semester->data_course[i].course_name<<',';
     }
-    in<<semester.data_course[semester.size_course - 1].course_name<<endl;
+    in<<semester->data_course[semester->size_course - 1].course_name<<endl;
 
     //The second line is the score
-    for (int i = 0; i < semester.size_course - 1; i++){
+    for (int i = 0; i < semester->size_course - 1; i++){
         int flag = 1;
-        for (int j = 0; j < semester.data_course[i].size_student; j++){
-            if (semester.data_course[i].enrolled_student[j].studentID == show){
+        for (int j = 0; j < semester->data_course[i].size_student; j++){
+            if (semester->data_course[i].enrolled_student[j].studentID == show){
                 flag = 0;
-                in<<semester.data_course[i].scores[j].score<<',';
+                in<<semester->data_course[i].scores[j].score<<',';
             }
         }
         
@@ -91,10 +89,10 @@ void show_score_semester_student(Semester semester, string show){
         }
     }
     int flag = 1;
-    for (int j = 0; j < semester.data_course[semester.size_course - 1].size_student; j++){
-        if (semester.data_course[semester.size_course - 1].enrolled_student[j].studentID == show){
+    for (int j = 0; j < semester->data_course[semester->size_course - 1].size_student; j++){
+        if (semester->data_course[semester->size_course - 1].enrolled_student[j].studentID == show){
             flag = 0;
-            in<<semester.data_course[semester.size_course - 1].scores[j].score<<endl;
+            in<<semester->data_course[semester->size_course - 1].scores[j].score<<endl;
         }
     }
         
@@ -105,67 +103,59 @@ void show_score_semester_student(Semester semester, string show){
     in.close();
 }
 
-
+//This function output the entire school year and gpa to csv file
 void show_score_schoolyear_student(SchoolYear year, string show){
     string temp = show + "_scores.csv";
-    ofstream in(temp, ios::app);
-
-    if (year.semester1_size > 0){
-        in<<year.year_name<<endl;
-    }
-
-    in.close();
 
     double gpa = 0;
     double n = 0;
-    for (int i = 0; i < year.semester1_size; i++){
-
+    
+    if (year.data_semester1){
         ofstream in(temp, ios::app);
-        in<<"First year semeter "<<i<<endl;
+        in<<"First semester"<<endl;
         in.close();
 
-        show_score_semester_student(year.data_semester1[i], show);
+        show_score_semester_student(year.data_semester1, show);
 
-        for (int j = 0; j < year.data_semester1[i].size_course; j++){
-            for (int z = 0; z < year.data_semester1[i].data_course[j].size_student; z++){
-                if (year.data_semester1[i].data_course[j].enrolled_student[z].studentID == show){
-                    gpa += year.data_semester1[i].data_course[j].scores[z].score;
+        for (int j = 0; j < year.data_semester1->size_course; j++){
+            for (int z = 0; z < year.data_semester1->data_course[j].size_student; z++){
+                if (year.data_semester1->data_course[j].enrolled_student[z].studentID == show){
+                    gpa += year.data_semester1->data_course[j].scores[z].score;
                     n++;
                 }
             }
         }
     }
 
-    for (int i = 0; i < year.semester2_size; i++){
-
+    
+    if (year.data_semester2){
         ofstream in(temp, ios::app);
-        in<<"Second year semeter "<<i<<endl;
+        in<<"Second semester"<<endl;
         in.close();
 
-        show_score_semester_student(year.data_semester2[i], show);
+        show_score_semester_student(year.data_semester2, show);
 
-        for (int j = 0; j < year.data_semester2[i].size_course; j++){
-            for (int z = 0; z < year.data_semester2[i].data_course[j].size_student; z++){
-                if (year.data_semester2[i].data_course[j].enrolled_student[z].studentID == show){
-                    gpa += year.data_semester2[i].data_course[j].scores[z].score;
+        for (int j = 0; j < year.data_semester2->size_course; j++){
+            for (int z = 0; z < year.data_semester2->data_course[j].size_student; z++){
+                if (year.data_semester2->data_course[j].enrolled_student[z].studentID == show){
+                    gpa += year.data_semester2->data_course[j].scores[z].score;
                     n++;
                 }
             }
         }
     }
 
-    for (int i = 0; i < year.semester3_size; i++){
-
+    if (year.data_semester3){
         ofstream in(temp, ios::app);
-        in<<"Third year semeter "<<i<<endl;
+        in<<"Second semester"<<endl;
         in.close();
 
-        show_score_semester_student(year.data_semester3[i], show);
-        
-        for (int j = 0; j < year.data_semester3[i].size_course; j++){
-            for (int z = 0; z < year.data_semester3[i].data_course[j].size_student; z++){
-                if (year.data_semester3[i].data_course[j].enrolled_student[z].studentID == show){
-                    gpa += year.data_semester3[i].data_course[j].scores[z].score;
+        show_score_semester_student(year.data_semester3, show);
+
+        for (int j = 0; j < year.data_semester3->size_course; j++){
+            for (int z = 0; z < year.data_semester3->data_course[j].size_student; z++){
+                if (year.data_semester3->data_course[j].enrolled_student[z].studentID == show){
+                    gpa += year.data_semester3->data_course[j].scores[z].score;
                     n++;
                 }
             }
