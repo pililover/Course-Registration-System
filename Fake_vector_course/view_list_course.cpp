@@ -87,18 +87,43 @@ void push_back_student_to_course(Course *&course_need_add_student_now, Student &
     course_need_add_student_now->enrolled_student[course_need_add_student_now->size_student] = value;
 }
 
-void view_list_of_course(SchoolYear *&school_year)
+void view_list_of_course(SchoolYear *school_year)
 {
     cout << "\t\tLIST OF COURSE IN THIS SEMESTER" << endl;
-    if (school_year[school_year->current_semester].semester_data->course_num == 0)
+    if (school_year->semester_data[school_year->current_semester].course_num == 0)
     {
         cout << "Course not found" << endl;
         return;
     }
-    for (int i = 0; i < school_year[school_year->current_semester].semester_data->course_num; i++)
+    for (int i = 0; i < school_year->semester_data[school_year->current_semester].course_num; i++)
     {
         cout << i + 1 << ". "
-             << school_year[school_year->current_semester].semester_data->data_course->course_id
-             << school_year[school_year->current_semester].semester_data->data_course->course_name << endl;
+             << school_year->semester_data[school_year->current_semester].data_course->course_id << " \t"
+             << school_year->semester_data[school_year->current_semester].data_course->course_name << endl;
     }
+}
+
+void export_student_from_course_to_file(SchoolYear *school_year, string courseid) // id của course muốn xuất danh sách học sinh nhập ở main
+{
+    ofstream op(courseid);
+    if (!op)
+    {
+        cout << "Cannot open the file" << endl;
+        return;
+    }
+    for (int i = 0; i < school_year->semester_data[school_year->current_semester].course_num; i++)
+    {
+        if (school_year->semester_data[school_year->current_semester].data_course[i].course_id == courseid)
+        {
+            op << i + 1 << ". " << school_year->semester_data[school_year->current_semester].data_course[i].course_id << " - "
+               << school_year->semester_data[school_year->current_semester].data_course[i].course_name << endl;
+            for (int j = 0; j < school_year->semester_data[school_year->current_semester].data_course[i].size_student; j++)
+            {
+                op << school_year->semester_data[school_year->current_semester].data_course[i].enrolled_student[j].studentID << " \t"
+                   << school_year->semester_data[school_year->current_semester].data_course[i].enrolled_student[j].firstname << " "
+                   << school_year->semester_data[school_year->current_semester].data_course[i].enrolled_student[j].lastname << endl;
+            }
+        }
+    }
+    op.close();
 }
