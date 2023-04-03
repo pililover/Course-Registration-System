@@ -1,82 +1,63 @@
-#include <iostream>
-#include <iomanip>
-#include <fstream>
-#include <sstream>
-#include <cstring>
-using namespace std;
+#include "Schoolyear_header.h"
 
-struct Student
+/*void init_semester_in_schoolyear(SchoolYear *&arr)
 {
-    string student_num;
-    string studentID;
-    string firstname;
-    string lastname;
-    string gender;
-    string birthday;
-    string socialID;
-};
+    arr->data_semester = new Semester[1]; // for semester
+    arr->semester_num = 0;
+    arr->semester_capacity = 12;
+}*/
 
-struct Score
+void resize_shoolyear_for_semester(SchoolYear *&arr, int new_capacity)
 {
-    int student_id;
-    float score;
-};
+    Semester *new_data = new Semester[new_capacity];
+    for (int i = 0; i < arr->semester_num; i++)
+    {
+        new_data[i] = arr->data_semester[i];
+    }
+    delete[] arr->data_semester;
+    arr->data_semester = new_data;
+    arr->semester_capacity = new_capacity;
+}
 
-struct Course
+void push_back_semester(SchoolYear *&arr, Semester *value)
 {
-    int course_id;
-    string course_name;
-    string class_name;
-    string teacher_name;
-    int credits;
-    int max_students = 50;
-    string day_of_week;
-    string session;
-    Student *enrolled_student;
-    int size_student;
-    int capacity_student;
-    Score *scores;
-};
+    if (arr->semester_num == arr->semester_capacity)
+    {
+        int new_capacity = arr->semester_capacity + 1;
+        resize_shoolyear_for_semester(arr, new_capacity);
+    }
+    arr->data_semester[arr->semester_num] = Semester(*value);
+    arr->semester_num++;
+    arr->current_semester = arr->semester_num - 1;
+}
 
-struct Semester
+void init_semester(Semester *&arr)
 {
-    Course *data_course = nullptr;
-    string start_day;
-    string end_day;
-    int size_course = 0;
-    int capacity_course = 0;
-};
+    arr = new Semester;
+    arr->data_course = new Course[1];
+    arr->course_num = 0;
+    arr->course_capacity = 1;
+}
 
-struct Classes
+void resize_semeter(Semester *&arr, int new_capacity)
 {
-    string class_name;
-    Student *data_student = nullptr; // dynamic
-    int student_num;                 // size
-    int student_capacity;
-};
+    Course *new_data = new Course[new_capacity];
+    for (int i = 0; i < arr->course_num; i++)
+    {
+        new_data[i] = arr->data_course[i];
+    }
+    delete[] arr->data_course;
+    arr->data_course = new_data;
+    arr->course_capacity = new_capacity;
+}
 
-struct SchoolYear
+void create_semester(SchoolYear *&school_year, Semester sem)
 {
-    string year_name; // Ex:2022-2023???
-    Classes *data_classes = nullptr;
-    Semester *data_semester1 = nullptr;
-    Semester *data_semester2 = nullptr;
-    Semester *data_semester3 = nullptr;
-    int class_num;
-    int class_capacity;
-    // SchoolYear *next;
-};
-
-void add_new_semester(SchoolYear *&sy)
-{
-    Semester *s = sy->data_semester1;
-    if (sy->data_semester1)
-        s = sy->data_semester2;
-    if (sy->data_semester2)
-        s = sy->data_semester3;
-    s = new Semester;
-    cout << "Enter start day semester: ";
-    cin >> s->start_day;
-    cout << "Enter end day semester: ";
-    cin >> s->end_day;
+    Semester *new_semester = nullptr;
+    init_semester(new_semester);
+    new_semester->semester_id = sem.semester_id;
+    new_semester->start_day = sem.start_day;
+    new_semester->end_day = sem.end_day;
+    push_back_semester(school_year, new_semester);
+    cout << "Semester " << school_year->current_semester + 1 << " add to school year successfully" << endl;
 }
