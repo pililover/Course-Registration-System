@@ -1,0 +1,103 @@
+#ifndef _SCHOOLYEAR_HEADER_H_
+#define _SCHOOLYEAR_HEADER_H_
+
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <cstring>
+
+using namespace std;
+
+struct Student
+{
+    string student_num; // so thu tu cua tung hoc sinh
+    string studentID;
+    string firstname;
+    string lastname;
+    string gender;
+    string birthday;
+    string socialID;
+};
+
+struct Course
+{
+    string course_id;
+    string course_name;
+    string class_name;
+    string teacher_name;
+    int credits;
+    int max_students; // student capacity in a course
+    string day_of_week;
+    string session;
+    Student *enrolled_student;
+    int size_student = 0; // so luong hoc sinh
+};
+
+struct Semester
+{
+    Course *data_course;
+    int course_num;
+    int course_capacity;
+    int semester_id;
+    string start_day;
+    string end_day;
+};
+
+struct Classes
+{
+    string class_name;
+    Student *data_student; // dynamic
+    int student_num = 0;   // size
+    int student_capacity;
+};
+
+struct SchoolYear
+{
+    string year_name;
+    Classes *data_classes;
+    Semester *data_semester;
+    int semester_num = 0;
+    int current_semester = 0;
+    int semester_capacity = 0;
+    int class_num = 0;
+    int class_capacity;
+};
+
+// Schoolyear.cpp
+void init_school_year(SchoolYear *&arr);
+void resize_school_year(SchoolYear *&arr, int new_capacity);
+SchoolYear *create_school_year(string year_name);
+
+void push_back_class(SchoolYear *&arr, Classes *value);
+void init_class(Classes *&arr);
+void resize_class(Classes *&arr, int new_capacity);
+void add_class_to_schoolyear(SchoolYear *school_year, string classname);
+void view_class_in_schoolyear(SchoolYear *school_year); // thêm vào để check thôi chứ không có trong yêu cầu
+
+// Student2class.cpp
+void push_back_student_to_class(Classes *&arr, Student value);
+void import_students_csv_to_class(SchoolYear *&school_year, string classname, string filename);
+void input_student_to_class(SchoolYear *&school_year, string classname);
+bool check_class_is_empty(SchoolYear *school_year);
+void view_student_in_class(SchoolYear *school_year);
+
+// void init_semester_in_schoolyear(SchoolYear *&arr);
+void resize_shoolyear_for_semester(SchoolYear *&arr, int new_capacity);
+void push_back_semester(SchoolYear *&arr, Semester *value);
+void init_semester(Semester *&arr);
+void resize_semeter(Semester *&arr, int new_capacity);
+void create_semester(SchoolYear *&school_year, Semester sem);
+
+void init_course(Course *&arr);
+void resize_course(Course *&arr, int new_capacity);
+void push_back_course(Semester *&arr, Course *value);
+void add_course_to_semester(Semester *&arr, Course value);
+void view_couse_in_semester(SchoolYear *school_year);
+
+void push_back_student_to_course(Course *&arr, Student value);
+void import_students_csv_to_course(SchoolYear *&school_year, string filename, string courseid);
+void input_student_to_course(SchoolYear *&school_year, string courseid);
+bool check_course_is_empty(SchoolYear *school_year);
+void view_student_in_course(SchoolYear *school_year);
+void update_course(Course* &update, SchoolYear* &year);
+#endif
