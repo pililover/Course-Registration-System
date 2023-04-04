@@ -5,7 +5,7 @@ int main()
 {
     node *accHead = NULL;
     node *accTail = NULL;
-    int usertype, access = 0; //0 - staff, 1 - student
+    int usertype, access = 0; // 0 - staff, 1 - student
     int op1, op2;
     string u_name, pass;
     user *newacc = new user;
@@ -93,6 +93,7 @@ int main()
                 case 4:
                 {
                     change_password(accHead, u_name, pass);
+                    break;
                 }
                 case 5:
                 {
