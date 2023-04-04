@@ -65,6 +65,7 @@ int main()
         {
             do
             {
+                cout << setw(120) << setfill('-') << endl;
                 cout << setw(50) << setfill(' ') << "HOME PAGE" << endl;
                 cout << "3. View profile" << endl;
                 cout << "4. Change password" << endl;
