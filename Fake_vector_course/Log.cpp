@@ -156,9 +156,9 @@ void print_in_file(node *accHead)
         ip << accHead->data->password << endl;
         accHead = accHead->next;
     }
+    ip.close();
     remove("account.csv");
     rename("new_update_acc.csv", "account.csv");
-    ip.close();
 }
 
 void deleteall(node *&accHead)
