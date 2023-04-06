@@ -87,7 +87,7 @@ void show_score_semester_student(Semester semester, string show){
     //The first line in csv is the courses names
     for (int i = 0; i < semester.course_num - 1; i++){
         in<<semester.data_course[i].course_name<<',';
-        cout<<semester.data_course[i].course_name<<',';
+        cout<<semester.data_course[i].course_name<<"    ";
     }
     in<<semester.data_course[semester.course_num - 1].course_name<<endl;
     cout<<semester.data_course[semester.course_num - 1].course_name<<endl;
@@ -99,13 +99,13 @@ void show_score_semester_student(Semester semester, string show){
             if (semester.data_course[i].enrolled_student[j].studentID == show){
                 flag = 0;
                 in<<semester.data_course[i].scores[j].score<<',';
-                cout<<semester.data_course[i].scores[j].score<<',';
+                cout<<semester.data_course[i].scores[j].score<<"    ";
             }
         }
         
         if (flag == 1){
             in<<'X'<<',';
-            cout<<'X'<<',';
+            cout<<'X'<<"    ";
         }
     }
     int flag = 1;
@@ -134,7 +134,7 @@ void show_score_schoolyear_student(SchoolYear* year, string show){
     
     if (year->data_semester){
         ofstream in(temp, ios::app);
-        in<<"Semester "<<year->current_semester + 1<<endl;
+        in<<"Semester"<<year->current_semester + 1<<endl;
         in.close();
         cout<<"Semester "<<year->current_semester + 1<<endl;
 
@@ -153,7 +153,7 @@ void show_score_schoolyear_student(SchoolYear* year, string show){
         in<<"Overall GPA,"<<gpa/n;
 
         in.close();
-        cout<<"Overall GPA,"<<gpa/n;
+        cout<<"Overall GPA: "<<gpa/n;
     }
 }
 
@@ -164,14 +164,15 @@ void show_scores_class(SchoolYear* year, Classes* classes){
     
     
     ofstream in(temp, ios::app);
-    in<<"Class "<<classes->class_name<<endl;
+    in<<"Class"<<classes->class_name<<endl;
     cout<<"Class "<<classes->class_name<<endl;
     in.close();
     
 
     for (int i = 0; i < classes->student_num - 1; i++){
         ofstream in(temp, ios::app);
-        in<<classes->data_student[i].studentID<<", "<<classes->data_student[i].firstname<<", "<<classes->data_student[i].lastname<<endl;
+        in<<classes->data_student[i].studentID<<','<<classes->data_student[i].firstname<<' '<<classes->data_student[i].lastname<<endl;
+        cout<<classes->data_student[i].studentID<<" "<<classes->data_student[i].firstname<<" "<<classes->data_student[i].lastname<<"    "<<endl;
         in.close();
 
         show_score_semester_student(year->data_semester[year->current_semester], classes->data_student[i].studentID);
@@ -189,6 +190,6 @@ void show_scores_class(SchoolYear* year, Classes* classes){
         in<<"Overall GPA,"<<gpa/n;
 
         in.close();
-        cout<<"Overall GPA,"<<gpa/n;
+        cout<<"Overall GPA: "<<gpa/n;
     }
 }
