@@ -64,28 +64,35 @@ void import_scoreboard_of_a_course(SchoolYear ssss){
 	string stmp;
 	cout<<"Enter name course want to import: ";
 	cin>>stmp;
-	Semester *a=ssss->semester_data[current_semester];
-	Course *b=nullptr;
-	for(int i=0;i<course_num;i++){
-		if(a->data_course[i].course_name==stmp){
-			b=a->data_course[i];
+	Semester a=ssss.semester_data[ssss.current_semester];
+	Course b;
+	for(int i=0;i<a.course_num;i++){
+		if(a.data_course[i].course_name==stmp){
+			b=a.data_course[i];
 		}
 	}
-	cin>>stmp;
-	cout<<"Enter file want to import score: ";
+	
+    cout<<"Enter file want to import score: ";
+    cin>>stmp;
 	ifstream fin;
 	fin.open(stmp);
 	while (!fin.is_open()){
 		cout<<"File want to import not invaluable, enter again: ";
 		cin>>stmp;
 		fin.open(stmp);
-	}
+    }
+    
+    int stt=0;
+    b.scores=new Score[b.size_student];     
 	int st_id;
 	float score_st;
 	while(!fin.eof()){
-		getline(fin,st_id,",");
-		getline(fin,score_st,",");
-		push_back_score(b->scores); ///not initialize now
-	}
+		getline(fin,stmp,',');
+        st_id=stoi(stmp);
+		getline(fin,stmp,',');
+        score_st=stof(stmp);
+        b.scores[stt].student_id=st_id;
+        b.scores[stt++].score=score_st;
+    }
 	fin.close();
 }
