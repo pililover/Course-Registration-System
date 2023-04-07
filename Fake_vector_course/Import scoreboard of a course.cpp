@@ -69,6 +69,7 @@ void import_scoreboard_of_a_course(SchoolYear ssss){
 	for(int i=0;i<a.course_num;i++){
 		if(a.data_course[i].course_name==stmp){
 			b=a.data_course[i];
+            break;
 		}
 	}
 	
