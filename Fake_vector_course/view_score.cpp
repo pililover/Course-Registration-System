@@ -71,6 +71,24 @@ struct System
     int year_capacity = 1;
 };
 
+//All years
+void cal_GPA_all(System &system, Classes* classes){
+    for (int i = 0; i < classes->student_num; i++){
+        double gpa = 0;
+        double n = 0;
+        for (int j = 0; j < system.year_num; j++){
+            for (int z = 0; z < system.data_schoolyear[j].class_num; z++){
+                if (system.data_schoolyear[j].data_classes[z].class_name == classes->class_name){
+                    gpa = system.data_schoolyear[j].data_classes[z].data_student[i].score;
+                    n++;
+                }
+            }
+            
+        }
+        classes->data_student[i].gpa_4_year = gpa/n;
+    }
+}
+
 //Current year
 void cal_GPA_current(SchoolYear* year, Classes* classes, int cur){
     for (int i = 0; i < classes->student_num; i++){
