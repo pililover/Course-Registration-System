@@ -4,11 +4,6 @@
 #include <sstream>
 using namespace std;
 
-// struct Score
-// {
-//     int student_id;
-//     float score;
-// };
 struct Student
 {
     string student_num;
@@ -70,7 +65,6 @@ void import_scoreboard_of_a_course(SchoolYear ssss){
 	for(int i=0;i<a.course_num;i++){
 		if(a.data_course[i].course_name==stmp){
 			b=a.data_course[i];
-            break;
 		}
 	}
 	
@@ -85,16 +79,16 @@ void import_scoreboard_of_a_course(SchoolYear ssss){
     }
     
     int stt=0;
-    b.scores=new Score[b.size_student];     
-	int st_id;
-	float score_st;
+	float score_st=0;
+
 	while(!fin.eof()){
 		getline(fin,stmp,',');
-        st_id=stoi(stmp);
+        getline(fin,stmp,',');
+        getline(fin,stmp,',');
 		getline(fin,stmp,',');
-        score_st=stof(stmp);
-        b.scores[stt].student_id=st_id;
-        b.scores[stt++].score=score_st;
+        Student c=b.enrolled_student[stt];
+        c.score=score_st;
+        stt++;
     }
 	fin.close();
 }
