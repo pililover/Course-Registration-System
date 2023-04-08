@@ -79,6 +79,11 @@ int main()
                 cout << "12. Add a student to the course" << endl;
                 cout << "13. Upload CSV file of enrolled students " << endl;
                 cout << "14. Update course information " << endl;
+                // just for check
+                cout << "15. View class of school year" << endl;
+                cout << "16. View student in all class" << endl;
+                cout << "17. View course in semester" << endl;
+                cout << "18. View student in course" << endl;
                 // cout << "15. Remove a student from the course" << endl;
                 // cout << "16. Delete course " << endl;
                 cout << "0. Exit" << endl;
