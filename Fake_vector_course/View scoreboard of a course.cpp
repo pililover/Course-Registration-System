@@ -4,12 +4,12 @@
 #include <sstream>
 using namespace std;
 
-struct Score
-{
-    int student_id;
-    float score;
-    Score *next;
-};
+// struct Score
+// {
+//     int student_id;
+//     float score;
+// };
+
 struct Student
 {
     string student_num;
@@ -19,7 +19,9 @@ struct Student
     string gender;
     string birthday;
     string socialID;
+    float score ;
 };
+
 struct Course
 {
     string course_id;
@@ -32,8 +34,8 @@ struct Course
     string session;
     Student *enrolled_student;
     int size_student;
-    int capacity_student;
-    Score *scores;
+    int capacity_student; //max=50;
+    // Score *scores;
 
 };
 struct Semester
@@ -66,17 +68,19 @@ void View_scoreboard_of_a_course(SchoolYear ssss){
     string stmp;
     cout<<"Enter course want to view scoreboard: ";
     cin>>stmp;
-    Semester *a=ssss->semester_data[current_semester];
-    Course *b=nullptr;
-    for(int i=0;i<course_num;i++){
-        if(a->data_course[i].course_name==stmp){
-            b=a->data_course[i];
+    Semester a=ssss.semester_data[ssss.current_semester];
+    Course b;
+    for(int i=0;i<a.course_num;i++){
+        if(a.data_course[i].course_name==stmp){
+            b=a.data_course[i];
+            break;
         }
     }
-    Score head=b->scores;
-    while(head){
-        search_and_show(head->student_id,b); /////not initialize now
-        head=head->next;
+    // Student  
+    for(int i=0; i<b.size_student;i++){
+        Student c=b.enrolled_student[i];
+        cout<<c.studentID<<"   ";
+        cout<<c.firstname<<" "<<c.lastname<<"   ";
+        cout<<c.score<<endl;
     }
-    delete head;
 }
