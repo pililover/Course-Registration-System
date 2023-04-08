@@ -7,11 +7,12 @@ using namespace std;
 
 struct Score
 {
-    int student_id;
+    int student_id; //search by id
     float score;
 };
 
-struct Student{
+struct Student
+{
     string student_num;
     string studentID;
     string firstname;
@@ -19,7 +20,6 @@ struct Student{
     string gender;
     string birthday;
     string socialID;
-    
 };
 
 struct Student
@@ -45,7 +45,7 @@ struct Course
     string session;
     Student *enrolled_student;
     int size_student = 0; // so luong hoc sinh
-    Score* scores;
+    Score *scores;
 };
 
 struct Semester
@@ -78,73 +78,87 @@ struct SchoolYear
     int class_capacity;
 };
 
-//The show variable is student ID value
-//This function output the score of a semester to csv file
-void show_score_semester_student(Semester semester, string show){
+// The show variable is student ID value
+// This function output the score of a semester to csv file
+void show_score_semester_student(Semester semester, string show)
+{
     string temp = show + "_scores.csv";
     ofstream in(temp, ios::app);
 
-    //The first line in csv is the courses names
-    for (int i = 0; i < semester.course_num - 1; i++){
-        in<<semester.data_course[i].course_name<<',';
-        cout<<semester.data_course[i].course_name<<"    ";
+    // The first line in csv is the courses names
+    for (int i = 0; i < semester.course_num - 1; i++)
+    {
+        in << semester.data_course[i].course_name << ',';
+        cout << semester.data_course[i].course_name << "    ";
     }
-    in<<semester.data_course[semester.course_num - 1].course_name<<endl;
-    cout<<semester.data_course[semester.course_num - 1].course_name<<endl;
+    in << semester.data_course[semester.course_num - 1].course_name << endl;
+    cout << semester.data_course[semester.course_num - 1].course_name << endl;
 
-    //The second line is the score
-    for (int i = 0; i < semester.course_num - 1; i++){
+    // The second line is the score
+    for (int i = 0; i < semester.course_num - 1; i++)
+    {
         int flag = 1;
-        for (int j = 0; j < semester.data_course[i].size_student; j++){
-            if (semester.data_course[i].enrolled_student[j].studentID == show){
+        for (int j = 0; j < semester.data_course[i].size_student; j++)
+        {
+            if (semester.data_course[i].enrolled_student[j].studentID == show)
+            {
                 flag = 0;
-                in<<semester.data_course[i].scores[j].score<<',';
-                cout<<semester.data_course[i].scores[j].score<<"    ";
+                in << semester.data_course[i].scores[j].score << ',';
+                cout << semester.data_course[i].scores[j].score << "    ";
             }
         }
-        
-        if (flag == 1){
-            in<<'X'<<',';
-            cout<<'X'<<"    ";
+
+        if (flag == 1)
+        {
+            in << 'X' << ',';
+            cout << 'X' << "    ";
         }
     }
     int flag = 1;
-    for (int j = 0; j < semester.data_course[semester.course_num - 1].size_student; j++){
-        if (semester.data_course[semester.course_num - 1].enrolled_student[j].studentID == show){
+    for (int j = 0; j < semester.data_course[semester.course_num - 1].size_student; j++)
+    {
+        if (semester.data_course[semester.course_num - 1].enrolled_student[j].studentID == show)
+        {
             flag = 0;
-            in<<semester.data_course[semester.course_num - 1].scores[j].score<<endl;
-            cout<<semester.data_course[semester.course_num - 1].scores[j].score<<endl;
+            in << semester.data_course[semester.course_num - 1].scores[j].score << endl;
+            cout << semester.data_course[semester.course_num - 1].scores[j].score << endl;
         }
     }
-        
-    if (flag == 1){
-        in<<'X'<<endl;
-        cout<<'X'<<endl;
+
+    if (flag == 1)
+    {
+        in << 'X' << endl;
+        cout << 'X' << endl;
     }
 
     in.close();
 }
 
-//This function output the entire school year and gpa to csv file and terminal
-//cur is the current semester
-//use loop to change the semester through cur
-void show_score_student(SchoolYear* year, int cur, string show){
+// This function output the entire school year and gpa to csv file and terminal
+// cur is the current semester
+// use loop to change the semester through cur
+void show_score_student(SchoolYear *year, int cur, string show)
+{
     string temp = show + "_scores.csv";
 
     double gpa = 0;
     double n = 0;
-    
-    if (year->data_semester){
+
+    if (year->data_semester)
+    {
         ofstream in(temp, ios::app);
-        in<<"Semester"<<cur + 1<<endl;
+        in << "Semester" << cur + 1 << endl;
         in.close();
-        cout<<"Semester "<<cur + 1<<endl;
+        cout << "Semester " << cur + 1 << endl;
 
         show_score_semester_student(year->data_semester[cur], show);
 
-        for (int j = 0; j < year->data_semester[cur].course_num; j++){
-            for (int z = 0; z < year->data_semester[cur].data_course[j].size_student; z++){
-                if (year->data_semester[cur].data_course[j].enrolled_student[z].studentID == show){
+        for (int j = 0; j < year->data_semester[cur].course_num; j++)
+        {
+            for (int z = 0; z < year->data_semester[cur].data_course[j].size_student; z++)
+            {
+                if (year->data_semester[cur].data_course[j].enrolled_student[z].studentID == show)
+                {
                     gpa += year->data_semester[cur].data_course[j].scores[z].score;
                     n++;
                 }
@@ -152,38 +166,41 @@ void show_score_student(SchoolYear* year, int cur, string show){
         }
         ofstream in(temp, ios::app);
 
-        in<<"Overall GPA,"<<gpa/n;
+        in << "Overall GPA," << gpa / n;
 
         in.close();
-        cout<<"Overall GPA: "<<gpa/n;
+        cout << "Overall GPA: " << gpa / n;
     }
 }
 
-//cur is the current semester
-//use loop to change the semester through cur
-void show_scores_class(SchoolYear* year, Classes* classes, int cur){
+// cur is the current semester
+// use loop to change the semester through cur
+void show_scores_class(SchoolYear *year, Classes *classes, int cur)
+{
     string temp = classes->class_name + "_scores.csv";
     double gpa = 0;
     double n = 0;
-    
-    
-    ofstream in(temp, ios::app);
-    in<<"Class"<<classes->class_name<<endl;
-    cout<<"Class "<<classes->class_name<<endl;
-    in.close();
-    
 
-    for (int i = 0; i < classes->student_num - 1; i++){
+    ofstream in(temp, ios::app);
+    in << "Class" << classes->class_name << endl;
+    cout << "Class " << classes->class_name << endl;
+    in.close();
+
+    for (int i = 0; i < classes->student_num - 1; i++)
+    {
         ofstream in(temp, ios::app);
-        in<<classes->data_student[i].studentID<<','<<classes->data_student[i].firstname<<' '<<classes->data_student[i].lastname<<endl;
-        cout<<classes->data_student[i].studentID<<" "<<classes->data_student[i].firstname<<" "<<classes->data_student[i].lastname<<"    "<<endl;
+        in << classes->data_student[i].studentID << ',' << classes->data_student[i].firstname << ' ' << classes->data_student[i].lastname << endl;
+        cout << classes->data_student[i].studentID << " " << classes->data_student[i].firstname << " " << classes->data_student[i].lastname << "    " << endl;
         in.close();
 
         show_score_semester_student(year->data_semester[cur], classes->data_student[i].studentID);
 
-        for (int j = 0; j < year->data_semester[cur].course_num; j++){
-            for (int z = 0; z < year->data_semester[cur].data_course[j].size_student; z++){
-                if (year->data_semester[cur].data_course[j].enrolled_student[z].studentID == classes->data_student[i].studentID){
+        for (int j = 0; j < year->data_semester[cur].course_num; j++)
+        {
+            for (int z = 0; z < year->data_semester[cur].data_course[j].size_student; z++)
+            {
+                if (year->data_semester[cur].data_course[j].enrolled_student[z].studentID == classes->data_student[i].studentID)
+                {
                     gpa += year->data_semester[cur].data_course[j].scores[z].score;
                     n++;
                 }
@@ -191,9 +208,9 @@ void show_scores_class(SchoolYear* year, Classes* classes, int cur){
         }
         ofstream in(temp, ios::app);
 
-        in<<"Overall GPA,"<<gpa/n;
+        in << "Overall GPA," << gpa / n;
 
         in.close();
-        cout<<"Overall GPA: "<<gpa/n;
+        cout << "Overall GPA: " << gpa / n;
     }
 }
