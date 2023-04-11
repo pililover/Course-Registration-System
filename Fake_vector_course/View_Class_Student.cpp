@@ -1,13 +1,25 @@
 #include "Schoolyear_header.h"
 
-void view_class_in_schoolyear(SchoolYear *school_year)
+void view_class_in_schoolyear(System system)
 {
-	if (!school_year)
+	if(system.year_num==0)
 	{
 		cout << "No school year available" << endl;
-		return;
 	}
-	cout << "School year: " << school_year->year_name << endl;
+	
+	string yearname;
+	SchoolYear *school_year = NULL;
+	cout << "School year: "; cin >> yearname;
+	do{
+		for(int i=0; i<system.year_num; i++){
+			if(system.data_schoolyear[i].year_name == yearname)
+			school_year = &(system.data_schoolyear[i]);
+		}
+		if(!school_year){
+			cout<<"Not found. Please choose a different school year: ";
+			cin>>yearname;
+		}
+	}while(!school_year);
 	if (check_class_is_empty(school_year))
 	{
 		cout << "No class available" << endl;
@@ -17,19 +29,26 @@ void view_class_in_schoolyear(SchoolYear *school_year)
 		cout << school_year->data_classes[i].class_name << endl;
 }
 
-/*Check school year first
-	if(!school_year) {
-		cout << "No school year available" << endl;
-		break;
-	}
-*/
-void view_student_in_class(SchoolYear *school_year)
+void view_student_in_class(System system)
 {
-	if (!school_year)
-	{
+	if(system.year_num==0)
 		cout << "No school year available" << endl;
-		return;
-	}
+		
+	string yearname;
+	SchoolYear *school_year = NULL;
+	cout << "School year: "; cin >> yearname;
+	do{
+		for(int i=0; i<system.year_num; i++)
+		{
+			if(system.data_schoolyear[i].year_name == yearname)
+			school_year = &(system.data_schoolyear[i]);
+		}
+		if(!school_year)
+		{
+			cout<<"Not found. Please choose a different school year: ";
+			cin>>yearname;
+		}
+	}while(!school_year);
 	if (check_class_is_empty(school_year))
 	{
 		cout << "No class available" << endl;
@@ -37,26 +56,14 @@ void view_student_in_class(SchoolYear *school_year)
 	}
 
 	string classname;
-	int index = -1;
+	int index;
 	cout << "Class name: ";
 	cin >> classname;
-	do
-	{
-		for (int i = 0; i < school_year->class_num; i++)
-		{
-			if (school_year->data_classes[i].class_name == classname)
-			{
-				index = i;
-				break;
-			}
-		}
-		if (index == -1)
-		{
-			cout << "Not found. Please choose a different name: ";
-			cin >> classname;
-		}
-	} while (index == -1);
-
+	while(!check_classname_in_a_year(*(school_year), classname, index)){
+		cout << "Not found. Please choose a different name: ";
+		cin >> classname;
+	}
+	
 	if (school_year->data_classes[index].student_num == 0)
 	{
 		cout << "No student in class" << endl;

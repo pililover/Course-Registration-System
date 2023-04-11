@@ -13,21 +13,20 @@ void push_back_student_to_class(Classes *&arr, Student value)
 
 void import_students_csv_to_class(SchoolYear *&school_year, string classname, string filename)
 {
+    int index;
+	while(!check_classname_in_a_year(*(school_year), classname, index))
+    {
+		cout << "Not found. Please choose a different name: ";
+		cin >> classname;
+	}
+    
     ifstream in(filename);
     if (!in.is_open())
     {
         cout << "Can not open file!" << endl;
         return;
     }
-    Classes *arr = nullptr;
-    for (int i = 0; i < school_year->class_num; i++)
-    {
-        if (school_year->data_classes[i].class_name == classname)
-        {
-            arr = &(school_year->data_classes[i]);
-            break;
-        }
-    }
+    Classes *arr = &(school_year->data_classes[index]);
     while (!in.eof())
     {
         Student tmp;
@@ -45,15 +44,14 @@ void import_students_csv_to_class(SchoolYear *&school_year, string classname, st
 
 void input_student_to_class(SchoolYear *&school_year, string classname)
 {
-    Classes *arr = NULL;
-    for (int i = 0; i < school_year->class_num; i++)
+    int index;
+	while(!check_classname_in_a_year(*(school_year), classname, index))
     {
-        if (school_year->data_classes[i].class_name == classname)
-        {
-            arr = &(school_year->data_classes[i]);
-            break; // moi add
-        }
-    }
+		cout << "Not found. Please choose a different name: ";
+		cin >> classname;
+	}
+	
+    Classes *arr = &(school_year->data_classes[index]);
     Student tmp;
     cout << "Enter student information" << endl;
     cout << "No: ";
