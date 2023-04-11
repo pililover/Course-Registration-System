@@ -146,7 +146,7 @@ int main()
                     }
                     cout << "Class name (add class to schoolyear): ";
                     cin >> classname;
-                    add_class_to_schoolyear(school_year, classname);
+                    add_class_to_schoolyear(systems, school_year, classname);
                     break;
                 }
                 case 8:
@@ -180,11 +180,12 @@ int main()
                         cout << "No class available" << endl;
                         break;
                     }
-                    cout << "Class needs to add student: ";
-                    cin >> classname;
+                    
                     string filename;
                     cout << "Name of import file: ";
                     cin >> filename;
+                    cout << "Class needs to add student: ";
+                    cin >> classname;
                     import_students_csv_to_class(school_year, classname, filename);
                     break;
                 }
@@ -316,14 +317,14 @@ int main()
                 {
                     system("CLEAR");
                     // view_class_in_schoolyear(school_year); // just for check
-                    view_class_in_schoolyear(school_year);
+                    view_class_in_schoolyear(systems);
                     break;
                 }
                 case 16:
                 {
                     system("CLEAR");
                     // view_student_in_class(school_year); //// just for check
-                    view_student_in_class(school_year);
+                    view_student_in_class(systems);
                     break;
                 }
                 case 17:
