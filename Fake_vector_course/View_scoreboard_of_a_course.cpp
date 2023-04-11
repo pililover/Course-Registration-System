@@ -1,23 +1,35 @@
 #include "Schoolyear_header.h"
 
-void View_scoreboard_of_a_course(SchoolYear *ssss, string courseid)
+void view_scoreboard_of_a_course(SchoolYear *school_year)
 {
-    Semester a = ssss->data_semester[ssss->current_semester];
-    Course b;
-    for (int i = 0; i < a.course_num; i++)
+    int check = 0;
+    string courseid;
+    Course *course = nullptr;
+    cout << "Enter CourseID: ";
+    cin >> courseid;
+    cout << setw(40) << setfill(' ') << "SCOREBOARD OF COURSE" << endl;
+    cout << '\t' << "No"
+         << "\t" << setw(15) << "StudentID" << setw(20) << "Firstname" << setw(20) << "Lastname" << setw(10) << "Score" << endl;
+    for (int i = 0; i < school_year->data_semester[school_year->current_semester].course_num; i++)
     {
-        if (a.data_course[i].course_name == courseid)
+        if (courseid == school_year->data_semester[school_year->current_semester].data_course[i].course_id)
         {
-            b = a.data_course[i];
+            course = &(school_year->data_semester[school_year->current_semester].data_course[i]);
+            check = 1;
             break;
         }
     }
-    // Student
-    for (int i = 0; i < b.size_student; i++)
+    if (check == 0)
     {
-        Student c = b.enrolled_student[i];
-        cout << c.studentID << "   ";
-        cout << c.firstname << " " << c.lastname << "   ";
-        cout << c.score << endl;
+        cout << "CourseID does not exist" << endl;
+        return;
+    }
+    for (int i = 0; i < course->size_student; i++)
+    {
+        cout << '\t' << '\t' << i + 1 << setw(4) << ". "
+             << setw(20) << course->enrolled_student[i].studentID << " "
+             << setw(20) << course->enrolled_student[i].firstname << " "
+             << setw(20) << course->enrolled_student[i].lastname << " "
+             << setw(10) << course->enrolled_student[i].score << endl;
     }
 }
