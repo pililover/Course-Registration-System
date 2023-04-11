@@ -86,8 +86,11 @@ void cal_GPA_all_student_in_class(System &system, Classes *classes)
             {
                 if (system.data_schoolyear[j].data_classes[z].class_name == classes->class_name)
                 {
-                    gpa = system.data_schoolyear[j].data_classes[z].data_student[i].score;
-                    n++;
+                    if (system.data_schoolyear[j].data_classes[z].data_student[i].score != -1)
+                    {
+                        gpa = system.data_schoolyear[j].data_classes[z].data_student[i].score;
+                        n++;
+                    }
                 }
             }
         }
@@ -108,8 +111,11 @@ void cal_GPA_current(SchoolYear *year, Classes *classes, int cur)
             {
                 if (year->data_semester[cur].data_course[j].enrolled_student[z].studentID == classes->data_student[i].studentID)
                 {
-                    gpa += year->data_semester[cur].data_course[j].enrolled_student[z].score;
-                    n++;
+                    if (year->data_semester[cur].data_course[j].enrolled_student[z].score != -1)
+                    {
+                        gpa += year->data_semester[cur].data_course[j].enrolled_student[z].score;
+                        n++;
+                    }
                 }
             }
         }
