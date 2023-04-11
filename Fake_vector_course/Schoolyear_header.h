@@ -120,9 +120,9 @@ void view_list_of_course(SchoolYear *school_year);
 void view_student_in_course(SchoolYear *school_year, int cur_course);
 void export_student_from_course_to_file(SchoolYear *school_year, string courseid); // id của course muốn xuất danh sách học sinh nhập ở main;
 
-void import_scoreboard_of_a_course(SchoolYear *ssss);
-void View_scoreboard_of_a_course(SchoolYear *ssss, string courseid);
-void update_student_result(SchoolYear *ssss, string courseid, string stuid);
+void import_scoreboard_of_a_course(SchoolYear *school_year);
+void view_scoreboard_of_a_course(SchoolYear *school_year);
+void update_student_result(SchoolYear *school_year);
 
 void cal_GPA_all_student_in_class(System &system, Classes *classes);
 void cal_GPA_current(SchoolYear *year, Classes *classes, int cur);
