@@ -1,3 +1,77 @@
+/*#include <iostream>
+#include <fstream>
+#include <cstring>
+#include <sstream>
+using namespace std;
+
+// struct Score
+// {
+//     int student_id;
+//     float score;
+// };
+struct Student
+{
+    string student_num;
+    string studentID;
+    string firstname;
+    string lastname;
+    string gender;
+    string birthday;
+    string socialID;
+    float score;      // score for course, gpa for class
+    float gpa_4_year; // gpa of all four year for class
+};
+struct Course
+{
+    string course_id;
+    string course_name;
+    string class_name;
+    string teacher_name;
+    int credits;
+    int max_students = 50;
+    string day_of_week;
+    string session;
+    Student *enrolled_student;
+    int size_student;
+    int capacity_student;
+    // Score *scores;
+};
+struct Semester
+{
+    Course *data_course = nullptr;
+    string start_day;
+    string end_day;
+    int course_num = 0;
+    int capacity_course = 0;
+};
+struct Classes
+{
+    string class_name;
+    Student *data_student = nullptr; // dynamic
+    int student_num;                 // size
+    int student_capacity;
+};
+
+struct SchoolYear
+{
+    string year_name;
+    Classes *data_classes;
+    Semester *data_semester;
+    int semester_num = 0;
+    int current_semester = 0;
+    int semester_capacity = 0;
+    int class_num = 0;
+    int class_capacity;
+};
+
+struct System
+{
+    SchoolYear *data_schoolyear;
+    int year_num = 0;
+    int year_capacity = 1;
+};
+*/
+// All years
 #include "Schoolyear_header.h"
 
 void cal_GPA_all_student_in_class(System &system, Classes *classes)
@@ -134,10 +208,10 @@ void show_scores_class(SchoolYear *year, Classes *classes, int cur)
 
     for (int i = 0; i < classes->student_num; i++)
     {
-        ofstream in(temp, ios::app);
-        in << classes->data_student[i].firstname << ' ' << classes->data_student[i].lastname << ',';
+        ofstream in1(temp, ios::app);
+        in1 << classes->data_student[i].firstname << ' ' << classes->data_student[i].lastname << ',';
         cout << classes->data_student[i].firstname << " " << classes->data_student[i].lastname << "  |  ";
-        in.close();
+        in1.close();
 
         show_score_semester_student(classes, year->data_semester[cur], classes->data_student[i].studentID);
     }
