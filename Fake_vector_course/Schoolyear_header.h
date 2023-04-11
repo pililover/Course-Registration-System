@@ -84,9 +84,10 @@ void push_back_class(SchoolYear *&arr, Classes *value);
 void init_class(Classes *&arr);
 void resize_class(Classes *&arr, int new_capacity);
 bool check_valid_classname(SchoolYear *school_year, string classname);
-void add_class_to_schoolyear(SchoolYear *school_year, string classname);
+bool check_classname_in_a_year(SchoolYear year, string classname, int &index);
+void add_class_to_schoolyear(System system, SchoolYear *school_year, string classname);
 // void view_class_in_schoolyear(SchoolYear *school_year); // thêm vào để check thôi chứ không có trong yêu cầu// void view_class_in_schoolyear(SchoolYear *school_year); // thêm vào để check thôi chứ không có trong yêu cầu
-void view_class_in_schoolyear(SchoolYear *school_year);
+void view_class_in_schoolyear(System system);
 
 // Student2class.cpp
 void push_back_student_to_class(Classes *&arr, Student value);
@@ -94,7 +95,7 @@ void import_students_csv_to_class(SchoolYear *&school_year, string classname, st
 void input_student_to_class(SchoolYear *&school_year, string classname);
 bool check_class_is_empty(SchoolYear *school_year);
 // void view_student_in_class(SchoolYear *school_year);
-void view_student_in_class(SchoolYear *school_year);
+void view_student_in_class(System system);
 
 // void init_semester_in_schoolyear(SchoolYear *&arr);
 void resize_shoolyear_for_semester(SchoolYear *&arr, int new_capacity);
