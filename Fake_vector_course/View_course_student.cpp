@@ -10,7 +10,7 @@ void view_list_of_course(SchoolYear *school_year)
     }
     for (int i = 0; i < school_year->data_semester[school_year->current_semester].course_num; i++)
     {
-        cout << i + 1 << setw(5) << ". "
+        cout << i + 1 << setw(5) << ". " << '\t'
              << setw(25) << school_year->data_semester[school_year->current_semester].data_course[i].course_id
              << setw(35) << school_year->data_semester[school_year->current_semester].data_course[i].course_name << endl;
     }
