@@ -131,6 +131,8 @@ void show_score_semester_student(Classes *classes, Semester semester, string sho
     ofstream in(temp, ios::app);
 
     // The first line in csv is the courses names
+    in << "Student,";
+    cout << "Student  |  ";
     for (int i = 0; i < semester.course_num; i++)
     {
         in << semester.data_course[i].course_name << ',';
@@ -148,6 +150,8 @@ void show_score_semester_student(Classes *classes, Semester semester, string sho
             if (semester.data_course[i].enrolled_student[j].studentID == show)
             {
                 flag = 0;
+                in << classes->data_student[i].firstname << ' ' << classes->data_student[i].lastname << ',';
+                cout << classes->data_student[i].firstname << " " << classes->data_student[i].lastname << "  |  ";
                 in << semester.data_course[i].enrolled_student[j].score << ',';
                 cout << semester.data_course[i].enrolled_student[j].score << "  |  ";
             }
@@ -214,11 +218,10 @@ void show_scores_class(SchoolYear *year, Classes *classes, int cur)
 
     for (int i = 0; i < classes->student_num; i++)
     {
-        ofstream in1(temp, ios::app);
-        in1 << classes->data_student[i].firstname << ' ' << classes->data_student[i].lastname << ',';
-        cout << classes->data_student[i].firstname << " " << classes->data_student[i].lastname << "  |  ";
-        in1.close();
-
         show_score_semester_student(classes, year->data_semester[cur], classes->data_student[i].studentID);
+        ofstream in1(temp, ios::app);
+        in1 << "GPA until current year," << classes->data_student[i].gpa_4_year << endl;
+        cout << "GPA until current year  | " << classes->data_student[i].gpa_4_year << endl;
+        in1.close();
     }
 }
