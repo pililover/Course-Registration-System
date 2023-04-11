@@ -491,14 +491,20 @@ int main()
                             if (classname == systems.data_schoolyear[i].data_classes[j].class_name)
                             {
                                 cur_class = &(systems.data_schoolyear[i].data_classes[j]);
+                                //Vòng lặp này để tính gpa của mọi năm của lớp để tránh bị segmentation fault
+                                for (int z = 0; z < systems.year_num; z++){
+                                    for (int k = 0; k < systems.data_schoolyear[z].semester_num; k++){
+                                        SchoolYear* temp = &(systems.data_schoolyear[i]);
+                                        cal_GPA_current(temp, cur_class, k);
+                                    }
+                                }
                                 cur_semester = systems.data_schoolyear[i].current_semester;
+                                cal_GPA_all_student_in_class(systems, cur_class);
+                                show_scores_class(school_year, cur_class, cur_semester);
                                 break;
                             }
                         }
                     }
-                    cal_GPA_all_student_in_class(systems, cur_class);
-                    cal_GPA_current(school_year, cur_class, cur_semester);
-                    show_scores_class(school_year, cur_class, cur_semester);
                     break;
                 }
                 case 24:
@@ -518,14 +524,20 @@ int main()
                             if (classname == systems.data_schoolyear[i].data_classes[j].class_name)
                             {
                                 cur_class1 = &(systems.data_schoolyear[i].data_classes[j]);
+                                //Vòng lặp này để tính gpa của mọi năm của lớp để tránh bị segmentation fault
+                                for (int z = 0; z < systems.year_num; z++){
+                                    for (int k = 0; k < systems.data_schoolyear[z].semester_num; k++){
+                                        SchoolYear* temp = &(systems.data_schoolyear[i]);
+                                        cal_GPA_current(temp, cur_class1, k);
+                                    }
+                                }
                                 cur_semester = systems.data_schoolyear[i].current_semester;
+                                cal_GPA_all_student_in_class(systems, cur_class1);
+                                show_score_student(school_year, cur_semester, cur_class1, stuid);
                                 break;
                             }
                         }
                     }
-                    cal_GPA_all_student_in_class(systems, cur_class1);
-                    cal_GPA_current(school_year, cur_class1, cur_semester);
-                    show_score_student(school_year, cur_semester, cur_class1, stuid);
                     break;
                 }
                     /*case 25:
