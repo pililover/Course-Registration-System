@@ -25,6 +25,11 @@ void view_class_in_schoolyear(SchoolYear *school_year)
 */
 void view_student_in_class(SchoolYear *school_year)
 {
+	if (!school_year)
+	{
+		cout << "No school year available" << endl;
+		return;
+	}
 	if (check_class_is_empty(school_year))
 	{
 		cout << "No class available" << endl;
