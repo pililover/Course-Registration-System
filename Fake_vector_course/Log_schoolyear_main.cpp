@@ -403,22 +403,7 @@ int main()
                         cout << "No course available" << endl;
                         break;
                     }
-                    int check = 0;
-                    cout << "Enter CourseID: ";
-                    cin >> courseid;
-                    for (int i = 0; i < school_year->data_semester[school_year->current_semester].course_num; i++)
-                    {
-                        if (courseid == school_year->data_semester[school_year->current_semester].data_course[i].course_id)
-                        {
-                            import_scoreboard_of_a_course(school_year);
-                            check = 1;
-                            break;
-                        }
-                    }
-                    if (check == 0)
-                    {
-                        cout << "CourseID does not exist" << endl;
-                    }
+                    import_scoreboard_of_a_course(school_year);
                     break;
                 }
                 case 21:
@@ -429,22 +414,7 @@ int main()
                         cout << "No course available" << endl;
                         break;
                     }
-                    int check = 0;
-                    cout << "Enter CourseID: ";
-                    cin >> courseid;
-                    for (int i = 0; i < school_year->data_semester[school_year->current_semester].course_num; i++)
-                    {
-                        if (courseid == school_year->data_semester[school_year->current_semester].data_course[i].course_id)
-                        {
-                            View_scoreboard_of_a_course(school_year, courseid);
-                            check = 1;
-                            break;
-                        }
-                    }
-                    if (check == 0)
-                    {
-                        cout << "CourseID does not exist" << endl;
-                    }
+                    view_scoreboard_of_a_course(school_year);
                     break;
                 }
                 case 22:
@@ -455,25 +425,7 @@ int main()
                         cout << "No course available" << endl;
                         break;
                     }
-                    int check = 0;
-                    string stuid;
-                    cout << "Enter Student ID: ";
-                    cin >> stuid;
-                    cout << "Enter CourseID: ";
-                    cin >> courseid;
-                    for (int i = 0; i < school_year->data_semester[school_year->current_semester].course_num; i++)
-                    {
-                        if (courseid == school_year->data_semester[school_year->current_semester].data_course[i].course_id)
-                        {
-                            update_student_result(school_year, courseid, stuid);
-                            check = 1;
-                            break;
-                        }
-                    }
-                    if (check == 0)
-                    {
-                        cout << "CourseID does not exist" << endl;
-                    }
+                    update_student_result(school_year);
                     break;
                 }
                 case 23:
@@ -491,10 +443,12 @@ int main()
                             if (classname == systems.data_schoolyear[i].data_classes[j].class_name)
                             {
                                 cur_class = &(systems.data_schoolyear[i].data_classes[j]);
-                                //Vòng lặp này để tính gpa của mọi năm của lớp để tránh bị segmentation fault
-                                for (int z = 0; z < systems.year_num; z++){
-                                    for (int k = 0; k < systems.data_schoolyear[z].semester_num; k++){
-                                        SchoolYear* temp = &(systems.data_schoolyear[i]);
+                                // Vòng lặp này để tính gpa của mọi năm của lớp để tránh bị segmentation fault
+                                for (int z = 0; z < systems.year_num; z++)
+                                {
+                                    for (int k = 0; k < systems.data_schoolyear[z].semester_num; k++)
+                                    {
+                                        SchoolYear *temp = &(systems.data_schoolyear[i]);
                                         cal_GPA_current(temp, cur_class, k);
                                     }
                                 }
@@ -524,10 +478,12 @@ int main()
                             if (classname == systems.data_schoolyear[i].data_classes[j].class_name)
                             {
                                 cur_class1 = &(systems.data_schoolyear[i].data_classes[j]);
-                                //Vòng lặp này để tính gpa của mọi năm của lớp để tránh bị segmentation fault
-                                for (int z = 0; z < systems.year_num; z++){
-                                    for (int k = 0; k < systems.data_schoolyear[z].semester_num; k++){
-                                        SchoolYear* temp = &(systems.data_schoolyear[i]);
+                                // Vòng lặp này để tính gpa của mọi năm của lớp để tránh bị segmentation fault
+                                for (int z = 0; z < systems.year_num; z++)
+                                {
+                                    for (int k = 0; k < systems.data_schoolyear[z].semester_num; k++)
+                                    {
+                                        SchoolYear *temp = &(systems.data_schoolyear[i]);
                                         cal_GPA_current(temp, cur_class1, k);
                                     }
                                 }
