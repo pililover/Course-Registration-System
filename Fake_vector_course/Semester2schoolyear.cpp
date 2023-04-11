@@ -59,5 +59,5 @@ void create_semester(SchoolYear *&school_year, Semester sem)
     new_semester->start_day = sem.start_day;
     new_semester->end_day = sem.end_day;
     push_back_semester(school_year, new_semester);
-    cout << "Semester " << school_year->current_semester + 1 << " add to school year successfully" << endl;
+    cout << "Semester " << school_year->data_semester[school_year->current_semester].semester_id << " add to school year successfully" << endl;
 }

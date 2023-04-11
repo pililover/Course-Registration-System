@@ -17,6 +17,8 @@ struct Student
     string gender;
     string birthday;
     string socialID;
+    float score;          // score for course, gpa for class
+    float gpa_4_year = 0; // gpa of all four year for class
 };
 
 struct Course
@@ -31,13 +33,14 @@ struct Course
     string session;
     Student *enrolled_student;
     int size_student = 0; // so luong hoc sinh
+    int capacity_student;
 };
 
 struct Semester
 {
-    Course *data_course;
-    int course_num;
-    int course_capacity;
+    Course *data_course = nullptr;
+    int course_num = 0;
+    int course_capacity = 0;
     int semester_id;
     string start_day;
     string end_day;
@@ -46,8 +49,8 @@ struct Semester
 struct Classes
 {
     string class_name;
-    Student *data_student; // dynamic
-    int student_num = 0;   // size
+    Student *data_student = nullptr; // dynamic
+    int student_num = 0;             // size
     int student_capacity;
 };
 
@@ -63,22 +66,34 @@ struct SchoolYear
     int class_capacity;
 };
 
+struct System
+{
+    SchoolYear *data_schoolyear;
+    int year_num = 0;
+    int year_capacity = 1;
+};
 // Schoolyear.cpp
-void init_school_year(SchoolYear *&arr);
+void init_system(System &arr);
 void resize_school_year(SchoolYear *&arr, int new_capacity);
-SchoolYear *create_school_year(string year_name);
+// SchoolYear *create_school_year(string year_name);
+void push_back_schoolyear(System &arr, SchoolYear *value);
+void create_school_year(System &system, string year_name);
+void view_school_year_and_class_in_each_year(System system);
 
 void push_back_class(SchoolYear *&arr, Classes *value);
 void init_class(Classes *&arr);
 void resize_class(Classes *&arr, int new_capacity);
+bool check_valid_classname(SchoolYear *school_year, string classname);
 void add_class_to_schoolyear(SchoolYear *school_year, string classname);
-void view_class_in_schoolyear(SchoolYear *school_year); // thêm vào để check thôi chứ không có trong yêu cầu
+// void view_class_in_schoolyear(SchoolYear *school_year); // thêm vào để check thôi chứ không có trong yêu cầu// void view_class_in_schoolyear(SchoolYear *school_year); // thêm vào để check thôi chứ không có trong yêu cầu
+void view_class_in_schoolyear(SchoolYear *school_year);
 
 // Student2class.cpp
 void push_back_student_to_class(Classes *&arr, Student value);
 void import_students_csv_to_class(SchoolYear *&school_year, string classname, string filename);
 void input_student_to_class(SchoolYear *&school_year, string classname);
 bool check_class_is_empty(SchoolYear *school_year);
+// void view_student_in_class(SchoolYear *school_year);
 void view_student_in_class(SchoolYear *school_year);
 
 // void init_semester_in_schoolyear(SchoolYear *&arr);
@@ -98,6 +113,21 @@ void push_back_student_to_course(Course *&arr, Student value);
 void import_students_csv_to_course(SchoolYear *&school_year, string filename, string courseid);
 void input_student_to_course(SchoolYear *&school_year, string courseid);
 bool check_course_is_empty(SchoolYear *school_year);
-void view_student_in_course(SchoolYear *school_year);
-void update_course(Course* &update, SchoolYear* &year);
+void update_course(Course *&update, SchoolYear *&year);
+
+// display
+void view_list_of_course(SchoolYear *school_year);
+void view_student_in_course(SchoolYear *school_year, int cur_course);
+void export_student_from_course_to_file(SchoolYear *school_year, string courseid); // id của course muốn xuất danh sách học sinh nhập ở main;
+
+void import_scoreboard_of_a_course(SchoolYear *ssss);
+void View_scoreboard_of_a_course(SchoolYear *ssss, string courseid);
+void update_student_result(SchoolYear *ssss, string courseid, string stuid);
+
+void cal_GPA_all_student_in_class(System &system, Classes *classes);
+void cal_GPA_current(SchoolYear *year, Classes *classes, int cur);
+void show_score_semester_student(Classes *classes, Semester semester, string show);
+void show_score_student(SchoolYear *year, int cur, Classes *classes, string show);
+void show_scores_class(SchoolYear *year, Classes *classes, int cur);
+
 #endif

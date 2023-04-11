@@ -80,7 +80,7 @@ bool check_class_is_empty(SchoolYear *school_year)
     return false;
 }
 
-void view_student_in_class(SchoolYear *school_year)
+/*void view_student_in_class(SchoolYear *school_year)
 {
     for (int i = 0; i < school_year->class_num; i++)
     {
@@ -95,4 +95,4 @@ void view_student_in_class(SchoolYear *school_year)
             }
         }
     }
-}
+}*/

@@ -11,7 +11,9 @@ int main()
     user *newacc = new user;
 
     string year_name, classname, courseid, filename;
-    SchoolYear *school_year = NULL;
+    System systems;
+    init_system(systems);           // kiểm soát full hệ thống
+    SchoolYear *school_year = NULL; // kiểm soát schoolyear hiện tại
     read_file_acc(accHead);
     do
     {
@@ -58,11 +60,14 @@ int main()
                 }
             } while (op1 != 0 && access == 0);
             if (op1 == 0)
+            {
                 break;
+            }
         }
 
         case 1: // chỉ khi đã login
         {
+            system("CLEAR");
             do
             {
                 cout << setw(120) << setfill('-') << endl;
@@ -70,20 +75,33 @@ int main()
                 cout << "3. View profile" << endl;
                 cout << "4. Change password" << endl;
                 cout << "5. Log out" << endl;
+                cout << endl;
                 cout << "6. Create school year" << endl;
                 cout << "7. Add class to school year" << endl;
                 cout << "8. Add new student to class" << endl;
                 cout << "9. Import students from csv file to class" << endl;
+                cout << endl;
                 cout << "10. Create semester" << endl;
                 cout << "11. Add course to current semester" << endl;
                 cout << "12. Add a student to the course" << endl;
-                cout << "13. Upload CSV file of enrolled students " << endl;
+                cout << "13. Upload CSV file of enrolled students to course" << endl;
                 cout << "14. Update course information " << endl;
-                // just for check
-                cout << "15. View class of school year" << endl;
-                cout << "16. View student in all class" << endl;
-                cout << "17. View course in semester" << endl;
-                cout << "18. View student in course" << endl;
+                cout << endl;
+                cout << "15. View list of class" << endl;
+                cout << "16. View student in a class" << endl;
+                cout << endl;
+                cout << "17. View list of courses" << endl;
+                cout << "18. View list of students in a course" << endl;
+                cout << "19. Export list of students in a course to CSV file" << endl;
+                cout << endl;
+                cout << "20. Import scoreboard of a course" << endl;
+                cout << "21. View scoreboard of a course" << endl;
+                cout << "22. Update student's result" << endl;
+                cout << endl;
+                cout << "23. View the scoreboard of a class, including final marks of all courses in the semester, GPA in this semester, and the overall GPA" << endl;
+                cout << "24. View student own scoreboard (after the scoreboard has been published)" << endl;
+                /*cout << "17. View course in semester" << endl;
+                cout << "18. View student in course" << endl;*/
                 // cout << "15. Remove a student from the course" << endl;
                 // cout << "16. Delete course " << endl;
                 cout << "0. Exit" << endl;
@@ -98,24 +116,29 @@ int main()
                 }
                 case 4:
                 {
+                    system("CLEAR");
                     change_password(accHead, u_name, pass);
                     break;
                 }
                 case 5:
                 {
+                    system("CLEAR");
                     access = 0;
                     cout << "Log out successfully" << endl;
                     break;
                 }
                 case 6:
                 {
+                    system("CLEAR");
                     cout << "School year: ";
                     cin >> year_name;
-                    school_year = create_school_year(year_name);
+                    create_school_year(systems, year_name);
+                    school_year = &(systems.data_schoolyear[systems.year_num - 1]);
                     break;
                 }
                 case 7:
                 {
+                    system("CLEAR");
                     if (school_year == nullptr)
                     {
                         cout << "No school year available" << endl;
@@ -128,6 +151,7 @@ int main()
                 }
                 case 8:
                 {
+                    system("CLEAR");
                     if (!school_year)
                     {
                         cout << "No school year available" << endl;
@@ -145,6 +169,7 @@ int main()
                 }
                 case 9:
                 {
+                    system("CLEAR");
                     if (!school_year)
                     {
                         cout << "No school year available" << endl;
@@ -165,7 +190,13 @@ int main()
                 }
                 case 10:
                 {
+                    system("CLEAR");
                     Semester sem;
+                    if (!school_year)
+                    {
+                        cout << "No school year available" << endl;
+                        break;
+                    }
                     cout << "Semester: ";
                     cin >> sem.semester_id; // 1,2 or 3 or 4 or 5...
                     cout << "Start day: ";
@@ -177,6 +208,7 @@ int main()
                 }
                 case 11:
                 {
+                    system("CLEAR");
                     Course temp;
                     cout << "Course id: ";
                     cin >> temp.course_id;
@@ -201,6 +233,7 @@ int main()
                 }
                 case 12:
                 {
+                    system("CLEAR");
                     if (check_course_is_empty(school_year))
                     {
                         cout << "No course available" << endl;
@@ -226,6 +259,7 @@ int main()
                 }
                 case 13:
                 {
+                    system("CLEAR");
                     if (check_course_is_empty(school_year))
                     {
                         cout << "No course available" << endl;
@@ -253,6 +287,7 @@ int main()
                 }
                 case 14:
                 {
+                    system("CLEAR");
                     if (check_course_is_empty(school_year))
                     {
                         cout << "No course available" << endl;
@@ -279,24 +314,230 @@ int main()
                 }
                 case 15:
                 {
-                    view_class_in_schoolyear(school_year); // just for check
+                    system("CLEAR");
+                    // view_class_in_schoolyear(school_year); // just for check
+                    view_class_in_schoolyear(school_year);
                     break;
                 }
                 case 16:
                 {
-                    view_student_in_class(school_year); //// just for check
+                    system("CLEAR");
+                    // view_student_in_class(school_year); //// just for check
+                    view_student_in_class(school_year);
                     break;
                 }
                 case 17:
                 {
-                    view_couse_in_semester(school_year); // just for check
+                    system("CLEAR");
+                    view_list_of_course(school_year);
                     break;
                 }
                 case 18:
                 {
-                    view_student_in_course(school_year); // also just for check
+                    system("CLEAR");
+                    if (!school_year)
+                    {
+                        cout << "No school year available" << endl;
+                        break;
+                    }
+                    if (!school_year->data_semester)
+                    {
+                        cout << "No semester available" << endl;
+                        break;
+                    }
+                    if (check_course_is_empty(school_year))
+                    {
+                        cout << "No course available" << endl;
+                        break;
+                    }
+                    cout << "CourseID of course needs to be viewed: ";
+                    cin >> courseid;
+                    int check = 0;
+                    for (int i = 0; i < school_year->data_semester[school_year->current_semester].course_num; i++)
+                    {
+                        if (courseid == school_year->data_semester[school_year->current_semester].data_course[i].course_id)
+                        {
+                            int cur_course = i;
+                            view_student_in_course(school_year, cur_course);
+                            check = 1;
+                            break;
+                        }
+                    }
+                    if (check == 0)
+                    {
+                        cout << "CourseID does not exist" << endl;
+                    }
                     break;
                 }
+                case 19:
+                {
+                    system("CLEAR");
+                    if (check_course_is_empty(school_year))
+                    {
+                        cout << "No course available" << endl;
+                        break;
+                    }
+                    int check = 0;
+                    cout << "Enter CourseID: ";
+                    cin >> courseid;
+                    for (int i = 0; i < school_year->data_semester[school_year->current_semester].course_num; i++)
+                    {
+                        if (courseid == school_year->data_semester[school_year->current_semester].data_course[i].course_id)
+                        {
+                            export_student_from_course_to_file(school_year, courseid);
+                            check = 1;
+                            break;
+                        }
+                    }
+                    if (check == 0)
+                    {
+                        cout << "CourseID does not exist" << endl;
+                    }
+                    break;
+                }
+                case 20:
+                {
+                    system("CLEAR");
+                    if (check_course_is_empty(school_year))
+                    {
+                        cout << "No course available" << endl;
+                        break;
+                    }
+                    int check = 0;
+                    cout << "Enter CourseID: ";
+                    cin >> courseid;
+                    for (int i = 0; i < school_year->data_semester[school_year->current_semester].course_num; i++)
+                    {
+                        if (courseid == school_year->data_semester[school_year->current_semester].data_course[i].course_id)
+                        {
+                            import_scoreboard_of_a_course(school_year);
+                            check = 1;
+                            break;
+                        }
+                    }
+                    if (check == 0)
+                    {
+                        cout << "CourseID does not exist" << endl;
+                    }
+                    break;
+                }
+                case 21:
+                {
+                    system("CLEAR");
+                    if (check_course_is_empty(school_year))
+                    {
+                        cout << "No course available" << endl;
+                        break;
+                    }
+                    int check = 0;
+                    cout << "Enter CourseID: ";
+                    cin >> courseid;
+                    for (int i = 0; i < school_year->data_semester[school_year->current_semester].course_num; i++)
+                    {
+                        if (courseid == school_year->data_semester[school_year->current_semester].data_course[i].course_id)
+                        {
+                            View_scoreboard_of_a_course(school_year, courseid);
+                            check = 1;
+                            break;
+                        }
+                    }
+                    if (check == 0)
+                    {
+                        cout << "CourseID does not exist" << endl;
+                    }
+                    break;
+                }
+                case 22:
+                {
+                    system("CLEAR");
+                    if (check_course_is_empty(school_year))
+                    {
+                        cout << "No course available" << endl;
+                        break;
+                    }
+                    int check = 0;
+                    string stuid;
+                    cout << "Enter Student ID: ";
+                    cin >> stuid;
+                    cout << "Enter CourseID: ";
+                    cin >> courseid;
+                    for (int i = 0; i < school_year->data_semester[school_year->current_semester].course_num; i++)
+                    {
+                        if (courseid == school_year->data_semester[school_year->current_semester].data_course[i].course_id)
+                        {
+                            update_student_result(school_year, courseid, stuid);
+                            check = 1;
+                            break;
+                        }
+                    }
+                    if (check == 0)
+                    {
+                        cout << "CourseID does not exist" << endl;
+                    }
+                    break;
+                }
+                case 23:
+                {
+                    system("CLEAR");
+                    string classname;
+                    cout << "Enter class name: ";
+                    cin >> classname;
+                    Classes *cur_class = nullptr; // lớp cần xem điểm
+                    int cur_semester;             // học kỳ cần xem điểm
+                    for (int i = 0; i < systems.year_num; i++)
+                    {
+                        for (int j = 0; j < systems.data_schoolyear[i].class_num; j++)
+                        {
+                            if (classname == systems.data_schoolyear[i].data_classes[j].class_name)
+                            {
+                                cur_class = &(systems.data_schoolyear[i].data_classes[j]);
+                                cur_semester = systems.data_schoolyear[i].current_semester;
+                                break;
+                            }
+                        }
+                    }
+                    cal_GPA_all_student_in_class(systems, cur_class);
+                    cal_GPA_current(school_year, cur_class, cur_semester);
+                    show_scores_class(school_year, cur_class, cur_semester);
+                    break;
+                }
+                case 24:
+                {
+                    system("CLEAR");
+                    string stuid, classname;
+                    Classes *cur_class1 = nullptr; // lớp cần xem điểm
+                    int cur_semester;              // học kỳ cần xem điểm
+                    cout << "Enter Student ID: ";
+                    cin >> stuid;
+                    cout << "Enter class name: ";
+                    cin >> classname;
+                    for (int i = 0; i < systems.year_num; i++)
+                    {
+                        for (int j = 0; j < systems.data_schoolyear[i].class_num; j++)
+                        {
+                            if (classname == systems.data_schoolyear[i].data_classes[j].class_name)
+                            {
+                                cur_class1 = &(systems.data_schoolyear[i].data_classes[j]);
+                                cur_semester = systems.data_schoolyear[i].current_semester;
+                                break;
+                            }
+                        }
+                    }
+                    cal_GPA_all_student_in_class(systems, cur_class1);
+                    cal_GPA_current(school_year, cur_class1, cur_semester);
+                    show_score_student(school_year, cur_semester, cur_class1, stuid);
+                    break;
+                }
+                    /*case 25:
+                    {
+                        view_couse_in_semester(school_year); // just for check
+                        break;
+                    }
+                    case 26:
+                    {
+                        // view_student_in_course(school_year, cur_course); // also just for check
+                        break;
+                    }*/
                 }
             } while (op2 != 0 && access != 0);
             if (access == 0)
@@ -328,7 +569,8 @@ int main()
         }
         delete[] school_year->data_semester;
     }
-    delete school_year;
+    // delete school_year;
+    delete[] systems.data_schoolyear;
     print_in_file(accHead);
     deleteall(accHead);
     return 0;
