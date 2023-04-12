@@ -6,6 +6,15 @@ void import_scoreboard_of_a_course(SchoolYear *school_year)
     string courseid;
     cout << "Enter courseID to import: ";
     cin >> courseid;
+    float percentage_final;
+    float percentage_midterm;
+    float percentage_other;
+    cout << "Percentage of other (x%): ";
+    cin >> percentage_other;
+    cout << "Percentage of midterm (x%): ";
+    cin >> percentage_midterm;
+    cout << "Percentage of final (x%): ";
+    cin >> percentage_final;
     Course *course = nullptr;
     for (int i = 0; i < school_year->data_semester[school_year->current_semester].course_num; i++)
     {
@@ -32,7 +41,10 @@ void import_scoreboard_of_a_course(SchoolYear *school_year)
         fin.open(filename);
     }
     int stt = 0;
-    float score_st = 0;
+    float total = 0;
+    float final = 0;
+    float midterm = 0;
+    float other = 0;
     string stuid;
     string stufirstname;
     string stulastname;
@@ -42,9 +54,17 @@ void import_scoreboard_of_a_course(SchoolYear *school_year)
         getline(fin, stuid, ',');
         getline(fin, stufirstname, ',');
         getline(fin, stulastname, ',');
+        getline(fin, stu_score, ',');
+        other = stof(stu_score);
+        course->enrolled_student[stt].other = other;
+        getline(fin, stu_score, ',');
+        midterm = stof(stu_score);
+        course->enrolled_student[stt].midterm = midterm;
         getline(fin, stu_score, '\n');
-        score_st = stof(stu_score);
-        course->enrolled_student[stt].score = score_st;
+        final = stof(stu_score);
+        course->enrolled_student[stt].final = final;
+        total = final * percentage_final / 100 + midterm * percentage_midterm / 100 + other * percentage_other / 100;
+        course->enrolled_student[stt].score = total;
         stt++;
     }
     fin.close();
