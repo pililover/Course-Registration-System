@@ -56,17 +56,6 @@ void show_score_semester_student(Classes *classes, Semester semester, string sho
     string temp = show + "_scores.csv";
     ofstream in(temp, ios::app);
 
-    // The first line in csv is the courses names
-    in << "Student,";
-    cout << "Student  |  ";
-    for (int i = 0; i < semester.course_num; i++)
-    {
-        in << semester.data_course[i].course_name << ',';
-        cout << semester.data_course[i].course_name << "  |  ";
-    }
-    in << "Overall GPA" << endl;
-    cout << "Overall GPA" << endl;
-
     // The second line is the score
     for (int i = 0; i < semester.course_num; i++)
     {
@@ -76,25 +65,30 @@ void show_score_semester_student(Classes *classes, Semester semester, string sho
             if (semester.data_course[i].enrolled_student[j].studentID == show)
             {
                 flag = 0;
-                in << classes->data_student[i].firstname << ' ' << classes->data_student[i].lastname << ',';
-                cout << classes->data_student[i].firstname << " " << classes->data_student[i].lastname << "  |  ";
+                in << semester.data_course[i].enrolled_student[j].other << ',';
+                cout << setw(10) << left << semester.data_course[i].enrolled_student[j].other;
+                in << semester.data_course[i].enrolled_student[j].midterm << ',';
+                cout << setw(10) << left << semester.data_course[i].enrolled_student[j].midterm;
+                in << semester.data_course[i].enrolled_student[j].final << ',';
+                cout << setw(10) << left << semester.data_course[i].enrolled_student[j].final;
                 in << semester.data_course[i].enrolled_student[j].score << ',';
-                cout << semester.data_course[i].enrolled_student[j].score << "  |  ";
+                cout << setw(10) << left << semester.data_course[i].enrolled_student[j].score;
             }
         }
 
         if (flag == 1)
         {
-            in << 'X' << ',';
-            cout << 'X' << "  |  ";
+            in << 'X' << ',' << 'X' << ',' << 'X' << 'X' << ',' << ',';
+            cout << setw(10) << left << 'X' << setw(10) << left << 'X' << setw(10) << left << 'X' << setw(10) << left << 'X';
         }
     }
     for (int i = 0; i < classes->student_num; i++)
     {
         if (classes->data_student[i].studentID == show)
         {
-            in << classes->data_student[i].score << endl;
-            cout << classes->data_student[i].score << endl;
+            in << classes->data_student[i].score << "," << classes->data_student[i].gpa_4_year << endl;
+            cout << setw(10) << left << classes->data_student[i].score << setw(10) << left << classes->data_student[i].gpa_4_year << endl;
+            
         }
     }
 
@@ -109,25 +103,43 @@ void show_score_student(SchoolYear *year, int cur, Classes *classes, string show
 {
     string temp = show + "_scores.csv";
 
-    if (year->data_semester)
+    ofstream in(temp);
+    in << "Semester" << cur + 1 << endl;
+    cout << "Semester " << cur + 1 << endl;
+    // The first line in csv is the courses names
+    in << "Num," << "Student ID," << "Student name,";
+    cout << setw(5) << left << "Num" <<setw(15) << left <<"Student ID" << setw(20) << left << "Student name";
+    for (int i = 0; i < year->data_semester[cur].course_num; i++)
     {
-        ofstream in(temp);
-        in << "Semester" << cur + 1 << endl;
-        in.close();
-        cout << "Semester " << cur + 1 << endl;
-
-        show_score_semester_student(classes, year->data_semester[cur], show);
-        ofstream in1(temp, ios::app);
-        for (int i = 0; i < classes->student_num; i++)
-        {
-            if (classes->data_student[i].studentID == show)
-            {
-                in1 << "GPA until current year," << classes->data_student[i].gpa_4_year << endl;
-                cout << "GPA until current year  | " << classes->data_student[i].gpa_4_year << endl;
-                break;
-            }
+        in << year->data_semester[cur].data_course[i].course_name << ',';
+        cout << setw(40) << left << year->data_semester[cur].data_course[i].course_name;
+    }
+    in << ",,,";
+    cout << setw(40) << "Score type";
+    for (int i = 0; i < year->data_semester[cur].course_num; i++)
+    {
+        in << "Other," << "Mid term," << "Final," << "Total,";
+        cout << setw(10) << left << "Other" << setw(10) << left << "Mid term" << setw(10) << left << "Final" << setw(10) << left << "Total";
+    }
+    in << "GPA," << endl;
+    cout << setw(10) << left << "GPA" << endl;
+    in << "Overall GPA," << endl;
+    cout << setw(10) << left << "Overall GPA" << endl;
+    in.close();
+    for (int i = 0; i < classes->student_num; i++)
+    {
+        if (classes->data_student[i].studentID == show){
+            ofstream in1(temp, ios::app);
+            in1 << classes->data_student[i].student_num << ',';
+            cout << setw(5) << left << classes->data_student[i].student_num;
+            in1 << classes->data_student[i].studentID << ',';
+            cout << setw(15) << left << classes->data_student[i].studentID;
+            in1 << classes->data_student[i].firstname << ' ' << classes->data_student[i].lastname << ',';
+            string name = classes->data_student[i].firstname + " " + classes->data_student[i].lastname;
+            cout << setw(20) << left << name;
+            in1.close();
+            show_score_semester_student(classes, year->data_semester[cur], classes->data_student[i].studentID);
         }
-        in1.close();
     }
 }
 
@@ -140,14 +152,38 @@ void show_scores_class(SchoolYear *year, Classes *classes, int cur)
     ofstream in(temp);
     in << "Class" << classes->class_name << endl;
     cout << "Class " << classes->class_name << endl;
+    // The first line in csv is the courses names
+    in << "Num," << "Student ID," << "Student name,";
+    cout << setw(5) << left << "Num" <<setw(15) << left <<"Student ID" << setw(20) << left << "Student name";
+    for (int i = 0; i < year->data_semester[cur].course_num; i++)
+    {
+        in << year->data_semester[cur].data_course[i].course_name << ',';
+        cout << setw(40) << left << year->data_semester[cur].data_course[i].course_name;
+    }
+    in << ",,,";
+    cout << setw(40) << "Score type";
+    for (int i = 0; i < year->data_semester[cur].course_num; i++)
+    {
+        in << "Other," << "Mid term," << "Final," << "Total,";
+        cout << setw(10) << left << "Other" << setw(10) << left << "Mid term" << setw(10) << left << "Final" << setw(10) << left << "Total";
+    }
+    in << "GPA," << endl;
+    cout << setw(10) << left << "GPA" << endl;
+    in << "Overall GPA," << endl;
+    cout << setw(10) << left << "Overall GPA" << endl;
     in.close();
 
     for (int i = 0; i < classes->student_num; i++)
     {
-        show_score_semester_student(classes, year->data_semester[cur], classes->data_student[i].studentID);
         ofstream in1(temp, ios::app);
-        in1 << "GPA until current year," << classes->data_student[i].gpa_4_year << endl;
-        cout << "GPA until current year  | " << classes->data_student[i].gpa_4_year << endl;
+        in1 << classes->data_student[i].student_num << ',';
+        cout << setw(5) << left << classes->data_student[i].student_num;
+        in1 << classes->data_student[i].studentID << ',';
+        cout << setw(15) << left << classes->data_student[i].studentID;
+        in1 << classes->data_student[i].firstname << ' ' << classes->data_student[i].lastname << ',';
+        string name = classes->data_student[i].firstname + " " + classes->data_student[i].lastname;
+        cout << setw(20) << left << name;
         in1.close();
+        show_score_semester_student(classes, year->data_semester[cur], classes->data_student[i].studentID);
     }
 }
