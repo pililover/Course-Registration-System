@@ -14,12 +14,12 @@ void push_back_student_to_class(Classes *&arr, Student value)
 void import_students_csv_to_class(SchoolYear *&school_year, string classname, string filename)
 {
     int index;
-	while(!check_classname_in_a_year(*(school_year), classname, index))
+    while (!check_classname_in_a_year(*(school_year), classname, index))
     {
-		cout << "Not found. Please choose a different name: ";
-		cin >> classname;
-	}
-    
+        cout << "Not found. Please choose a different name: ";
+        cin >> classname;
+    }
+
     ifstream in(filename);
     if (!in.is_open())
     {
@@ -37,6 +37,11 @@ void import_students_csv_to_class(SchoolYear *&school_year, string classname, st
         getline(in, tmp.gender, ',');
         getline(in, tmp.birthday, ',');
         getline(in, tmp.socialID, '\n');
+        tmp.score = -1; // To check if there are no score
+        tmp.final = -1;
+        tmp.midterm = -1;
+        tmp.other = -1;
+        tmp.gpa_4_year = 0;
         push_back_student_to_class(arr, tmp);
     }
     in.close();
@@ -45,12 +50,12 @@ void import_students_csv_to_class(SchoolYear *&school_year, string classname, st
 void input_student_to_class(SchoolYear *&school_year, string classname)
 {
     int index;
-	while(!check_classname_in_a_year(*(school_year), classname, index))
+    while (!check_classname_in_a_year(*(school_year), classname, index))
     {
-		cout << "Not found. Please choose a different name: ";
-		cin >> classname;
-	}
-	
+        cout << "Not found. Please choose a different name: ";
+        cin >> classname;
+    }
+
     Classes *arr = &(school_year->data_classes[index]);
     Student tmp;
     cout << "Enter student information" << endl;
@@ -68,6 +73,11 @@ void input_student_to_class(SchoolYear *&school_year, string classname)
     cin >> tmp.birthday;
     cout << "Social ID: ";
     cin >> tmp.socialID;
+    tmp.score = -1; // To check if there are no score
+    tmp.final = -1;
+    tmp.midterm = -1;
+    tmp.other = -1;
+    tmp.gpa_4_year = 0;
     push_back_student_to_class(arr, tmp);
 }
 
