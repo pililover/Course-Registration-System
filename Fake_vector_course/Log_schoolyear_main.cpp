@@ -497,6 +497,11 @@ int main()
                     }
                     break;
                 }
+                default:
+                {
+                    cout<<"Invalid option!"<<endl;
+                    break;
+                }
                     /*case 25:
                     {
                         view_couse_in_semester(school_year); // just for check
