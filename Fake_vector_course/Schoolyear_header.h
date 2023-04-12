@@ -17,7 +17,10 @@ struct Student
     string gender;
     string birthday;
     string socialID;
-    float score;          // score for course, gpa for class
+    float score; // score for course, gpa for class
+    float other;
+    float midterm;
+    float final;
     float gpa_4_year = 0; // gpa of all four year for class
 };
 
