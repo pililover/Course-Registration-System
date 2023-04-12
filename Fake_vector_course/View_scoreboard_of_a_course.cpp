@@ -26,10 +26,13 @@ void view_scoreboard_of_a_course(SchoolYear *school_year)
     }
     for (int i = 0; i < course->size_student; i++)
     {
-        cout << '\t' << '\t' << i + 1 << setw(4) << ". "
+        cout << '\t' << i + 1 << setw(4) << ". "
              << setw(20) << course->enrolled_student[i].studentID << " "
              << setw(20) << course->enrolled_student[i].firstname << " "
              << setw(20) << course->enrolled_student[i].lastname << " "
-             << setw(10) << course->enrolled_student[i].score << endl;
+             << setw(5) << course->enrolled_student[i].other << " "
+             << setw(5) << course->enrolled_student[i].midterm << " "
+             << setw(5) << course->enrolled_student[i].final << " "
+             << setw(5) << course->enrolled_student[i].score << endl;
     }
 }
