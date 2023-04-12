@@ -38,7 +38,11 @@ void import_students_csv_to_course(SchoolYear *&school_year, string filename, st
         getline(in, tmp.gender, ',');
         getline(in, tmp.birthday, ',');
         getline(in, tmp.socialID, '\n');
-        tmp.score = -1; //To check if there are no score
+        tmp.score = -1; // To check if there are no score
+        tmp.final = -1;
+        tmp.midterm = -1;
+        tmp.other = -1;
+        tmp.gpa_4_year = 0;
         push_back_student_to_course(arr, tmp);
     }
     in.close();
@@ -72,7 +76,11 @@ void input_student_to_course(SchoolYear *&school_year, string courseid)
     cin >> tmp.birthday;
     cout << "Social ID: ";
     cin >> tmp.socialID;
-    tmp.score = -1; //To check if there are no score
+    tmp.score = -1; // To check if there are no score
+    tmp.final = -1;
+    tmp.midterm = -1;
+    tmp.other = -1;
+    tmp.gpa_4_year = 0;
     push_back_student_to_course(arr, tmp);
 }
 
