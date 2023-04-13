@@ -53,16 +53,15 @@ void resize_semeter(Semester *&arr, int new_capacity)
 
 void create_semester(SchoolYear *&school_year, Semester sem)
 {
-    if (sem.semester_id == school_year->current_semester + 1) {
-        cout << "The semester created. Create new semester unsuccessfull.";
+    Semester *new_semester = nullptr;
+    init_semester(new_semester);
+    if (sem.semester_id == school_year->current_semester + 1 && sem.semester_id<=1 && sem.semester_id>=0 ) {
+        new_semester->semester_id = sem.semester_id;
+        new_semester->start_day = sem.start_day;
+        new_semester->end_day = sem.end_day;
+        push_back_semester(school_year, new_semester);
+        cout << "Semester " << school_year->data_semester[school_year->current_semester].semester_id << " add to school year successfully" << endl;
         return;
     }
-
-    Semester *new_semester = nullptr;
-    //init_semester(new_semester);
-    new_semester->semester_id = sem.semester_id;
-    new_semester->start_day = sem.start_day;
-    new_semester->end_day = sem.end_day;
-    push_back_semester(school_year, new_semester);
-    cout << "Semester " << school_year->data_semester[school_year->current_semester].semester_id << " add to school year successfully" << endl;
+    cout << "The semester created. Create new semester unsuccessfull.";
 }
