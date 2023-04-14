@@ -53,7 +53,7 @@ void resize_semeter(Semester *&arr, int new_capacity)
 
 void create_semester(SchoolYear *&school_year, Semester sem)
 {
-    if (sem.semester_id == school_year->current_semester + 1 && sem.semester_id<=1 && sem.semester_id>=0 ) {
+    if (sem.semester_id == school_year->current_semester + 1 && sem.semester_id<=3 && sem.semester_id>=1 ) {
         Semester *new_semester = nullptr;
         init_semester(new_semester);
         new_semester->semester_id = sem.semester_id;
