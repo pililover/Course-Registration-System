@@ -45,12 +45,14 @@ void import_scoreboard_of_a_course(SchoolYear *school_year)
     float final = 0;
     float midterm = 0;
     float other = 0;
+    string stunum;
     string stuid;
     string stufirstname;
     string stulastname;
     string stu_score;
     while (!fin.eof())
     {
+        getline(fin, stunum, ',');
         getline(fin, stuid, ',');
         getline(fin, stufirstname, ',');
         getline(fin, stulastname, ',');
