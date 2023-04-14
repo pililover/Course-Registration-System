@@ -36,12 +36,7 @@ void view_class_in_schoolyear(System system)
 	for (int i = 0; i < school_year->class_num; i++)
 		cout << '\t' << setw(3) << i + 1 << ". " << school_year->data_classes[i].class_name << endl;
 }
-/*Check school year first
-	if(!school_year) {
-		cout << "No school year available" << endl;
-		break;
-	}
-*/
+
 void view_student_in_class(System system)
 {
 	if (system.year_num == 0)
