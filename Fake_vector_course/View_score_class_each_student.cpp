@@ -160,7 +160,9 @@ void show_scores_class(SchoolYear *year, Classes *classes, int cur)
         in << year->data_semester[cur].data_course[i].course_name << ',';
         cout << setw(40) << left << year->data_semester[cur].data_course[i].course_name;
     }
-    in << ",,,";
+    in<<endl;
+    cout<<endl;
+    in << "Score type,X,X,";
     cout << setw(40) << "Score type";
     for (int i = 0; i < year->data_semester[cur].course_num; i++)
     {
