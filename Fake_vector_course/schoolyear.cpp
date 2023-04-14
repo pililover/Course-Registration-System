@@ -121,7 +121,7 @@ void add_class_to_schoolyear(System system, SchoolYear *school_year, string clas
 		for(int i=0; i<system.year_num; i++)
 			if(check_classname_in_a_year(system.data_schoolyear[i], classname, check)) 
             {
-               cout<<check<<" Already have this class. Please use a new class name: ";
+               cout<<" Already have this class. Please use a new class name: ";
                cin>>classname; break;
             }
 	}while(check!=-1);
