@@ -78,7 +78,7 @@ void show_score_semester_student(Classes *classes, Semester semester, string sho
 
         if (flag == 1)
         {
-            in << 'X' << ',' << 'X' << ',' << 'X' << 'X' << ',' << ',';
+            in << 'X' << ',' << 'X' << ',' << 'X' << ',' << 'X' << ',';
             cout << setw(10) << left << 'X' << setw(10) << left << 'X' << setw(10) << left << 'X' << setw(10) << left << 'X';
         }
     }
@@ -198,4 +198,19 @@ void show_scores_class(SchoolYear *year, Classes *classes, int cur)
         in1.close();
         show_score_semester_student(classes, year->data_semester[cur], classes->data_student[i].studentID);
     }
+}
+
+//Not done yet
+void find_score(string classname, string ID){
+    ifstream in(classname);
+
+    while (!in.eof()){
+        string temp;
+        getline(in, temp, ',');
+        if (temp == ID){
+            //cout << the entire line
+        }
+    }
+
+    in.close();
 }
