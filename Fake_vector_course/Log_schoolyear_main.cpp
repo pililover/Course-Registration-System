@@ -210,6 +210,11 @@ int main()
                 case 11:
                 {
                     system("CLEAR");
+                    if (!school_year)
+                    {
+                        cout << "No school year available" << endl;
+                        break;
+                    }
                     Course temp;
                     cout << "Course id: ";
                     cin >> temp.course_id;
@@ -235,6 +240,11 @@ int main()
                 case 12:
                 {
                     system("CLEAR");
+                    if (!school_year)
+                    {
+                        cout << "No school year available" << endl;
+                        break;
+                    }
                     if (check_course_is_empty(school_year))
                     {
                         cout << "No course available" << endl;
@@ -261,6 +271,11 @@ int main()
                 case 13:
                 {
                     system("CLEAR");
+                    if (!school_year)
+                    {
+                        cout << "No school year available" << endl;
+                        break;
+                    }
                     if (check_course_is_empty(school_year))
                     {
                         cout << "No course available" << endl;
@@ -289,6 +304,11 @@ int main()
                 case 14:
                 {
                     system("CLEAR");
+                    if (!school_year)
+                    {
+                        cout << "No school year available" << endl;
+                        break;
+                    }
                     if (check_course_is_empty(school_year))
                     {
                         cout << "No course available" << endl;
@@ -330,6 +350,11 @@ int main()
                 case 17:
                 {
                     system("CLEAR");
+                    if (!school_year)
+                    {
+                        cout << "No school year available" << endl;
+                        break;
+                    }
                     view_list_of_course(school_year);
                     break;
                 }
