@@ -398,6 +398,16 @@ int main()
                 case 19:
                 {
                     system("CLEAR");
+                    if (!school_year)
+                    {
+                        cout << "No school year available" << endl;
+                        break;
+                    }
+                    if(!school_year->data_semester)
+                    {
+                        cout << "No semester available" << endl;
+                        break;
+                    }
                     if (check_course_is_empty(school_year))
                     {
                         cout << "No course available" << endl;
@@ -424,6 +434,16 @@ int main()
                 case 20:
                 {
                     system("CLEAR");
+                    if (!school_year)
+                    {
+                        cout << "No school year available" << endl;
+                        break;
+                    }
+                    if(!school_year->data_semester)
+                    {
+                        cout << "No semester available" << endl;
+                        break;
+                    }
                     if (check_course_is_empty(school_year))
                     {
                         cout << "No course available" << endl;
@@ -435,6 +455,16 @@ int main()
                 case 21:
                 {
                     system("CLEAR");
+                    if (!school_year)
+                    {
+                        cout << "No school year available" << endl;
+                        break;
+                    }
+                    if(!school_year->data_semester)
+                    {
+                        cout << "No semester available" << endl;
+                        break;
+                    }
                     if (check_course_is_empty(school_year))
                     {
                         cout << "No course available" << endl;
@@ -446,6 +476,16 @@ int main()
                 case 22:
                 {
                     system("CLEAR");
+                    if (!school_year)
+                    {
+                        cout << "No school year available" << endl;
+                        break;
+                    }
+                    if(!school_year->data_semester)
+                    {
+                        cout << "No semester available" << endl;
+                        break;
+                    }
                     if (check_course_is_empty(school_year))
                     {
                         cout << "No course available" << endl;
