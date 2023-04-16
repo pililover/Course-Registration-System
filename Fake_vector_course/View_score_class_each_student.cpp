@@ -94,10 +94,7 @@ void show_score_semester_student(Classes *classes, Semester semester, string sho
     in.close();
 }
 
-// This function output the score and gpa of a student to csv file and terminal
-// cur is the current semester
-// classes is the class the student is in
-// use loop to change the semester through cur
+//The old version, new version is find_score
 void show_score_student(SchoolYear *year, int cur, Classes *classes, string show)
 {
     string temp = show + "_scores.csv";
@@ -155,7 +152,6 @@ void show_scores_class(SchoolYear *year, Classes *classes, int cur)
     string temp = classes->class_name + "_scores.csv";
 
     ofstream in(temp);
-    in << "Class" << classes->class_name << endl;
     cout << "Class " << classes->class_name << endl;
     // The first line in csv is the courses names
     in << "Num,"
@@ -180,7 +176,7 @@ void show_scores_class(SchoolYear *year, Classes *classes, int cur)
         cout << setw(10) << left << "Other" << setw(10) << left << "Mid term" << setw(10) << left << "Final" << setw(10) << left << "Total";
     }
     in << "GPA," << endl;
-    cout << setw(10) << left << "GPA" << endl;
+    cout << setw(10) << left << "GPA";
     in << "Overall GPA," << endl;
     cout << setw(10) << left << "Overall GPA" << endl;
     in.close();
@@ -200,17 +196,71 @@ void show_scores_class(SchoolYear *year, Classes *classes, int cur)
     }
 }
 
-//Not done yet
+//Not tested yet
 void find_score(string classname, string ID){
-    ifstream in(classname);
-
-    while (!in.eof()){
-        string temp;
-        getline(in, temp, ',');
-        if (temp == ID){
-            //cout << the entire line
-        }
+    string class_old = classname + "_scores.csv";
+    ifstream in(class_old);
+    if (!in.is_open()){
+        cout<<"Error! This class does not exist"<<endl;
+        return;
     }
 
+    int exist = 0, pos = 0;
+    string temp;
+    getline(in, temp);
+    getline(in, temp);
+    while (!in.eof()){
+        getline(in, temp, ',');
+        getline(in, temp, ',');
+        if (temp == ID){
+            exist = 1;
+            break;
+        }
+        getline(in, temp);
+        pos++;
+    }
     in.close();
+    
+    if (exist == 0){
+        cout << "This ID does not exist in this class"<<endl;
+    }
+    else{
+        ifstream in1(class_old);
+        cout << setw(5) << left << "Num" << setw(15) << left << "Student ID" << setw(20) << left << "Student name";
+        getline(in1, temp, ',');
+        getline(in1, temp, ',');
+        getline(in1, temp, ',');
+        int n = 0;
+        while (in1.peek() != '\n' || in1.peek() != '\r'){
+            getline(in1, temp, ',');
+            cout << setw(40) << left << temp;
+            n++;
+        }
+        getline(in1, temp);
+        for (int i = 0; i < n; i++)
+        {
+            cout << setw(10) << left << "Other" << setw(10) << left << "Mid term" << setw(10) << left << "Final" << setw(10) << left << "Total";
+        }
+        cout << setw(10) << left << "GPA";
+        cout << setw(10) << left << "Overall GPA" << endl;
+        for (int i = 1; i < pos; i++)
+        {
+            getline(in, temp);
+        }
+        getline(in, temp, ',');
+        cout << setw(5) << left << temp;
+        getline(in, temp, ',');
+        cout << setw(15) << left << temp;
+        getline(in, temp, ',');
+        cout << setw(20) << left << temp;
+        for (int i = 0; i < n; i++)
+        {
+            getline(in, temp, ',');
+            cout << setw(10) << left << temp;
+        }
+        getline(in, temp, ',');
+        cout << setw(10) << left << temp;
+        getline(in, temp);
+        getline(in, temp, ',');
+    }
 }
