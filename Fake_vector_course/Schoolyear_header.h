@@ -105,7 +105,7 @@ void resize_shoolyear_for_semester(SchoolYear *&arr, int new_capacity);
 void push_back_semester(SchoolYear *&arr, Semester *value);
 void init_semester(Semester *&arr);
 void resize_semeter(Semester *&arr, int new_capacity);
-void create_semester(SchoolYear *&school_year, Semester sem);
+void create_semester(System systems, Semester sem);
 
 void init_course(Course *&arr);
 void resize_course(Course *&arr, int new_capacity);
