@@ -105,7 +105,8 @@ bool check_valid_classname(SchoolYear *school_year, string classname)
 
 bool check_classname_in_a_year(SchoolYear year, string classname, int &index){
 	for(int i=0; i < year.class_num; i++){
-		if(year.data_classes[i].class_name == classname){
+		if(year.data_classes[i].class_name == classname)
+		{
 			index = i;
 			return true;
 		}
@@ -117,13 +118,13 @@ void add_class_to_schoolyear(System system, SchoolYear *school_year, string clas
 {
     int check;
     do{
-		check=-1;
-		for(int i=0; i<system.year_num; i++)
-			if(check_classname_in_a_year(system.data_schoolyear[i], classname, check)) 
-            {
-               cout<<" Already have this class. Please use a new class name: ";
-               cin>>classname; break;
-            }
+	check=-1;
+	for(int i=0; i<system.year_num; i++)
+		if(check_classname_in_a_year(system.data_schoolyear[i], classname, check))
+		{
+               		cout<<" Already have this class. Please use a new class name: ";
+               		cin>>classname; break;
+            	}
 	}while(check!=-1);
     
     Classes *new_class = nullptr;
