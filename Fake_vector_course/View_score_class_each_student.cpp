@@ -197,7 +197,7 @@ void show_scores_class(SchoolYear *year, Classes *classes, int cur)
 }
 
 //Not tested yet
-void find_score(string classname, string ID){
+void find_score_student(string classname, string ID){
     string class_old = classname + "_scores.csv";
     ifstream in(class_old);
     if (!in.is_open()){
@@ -245,8 +245,54 @@ void find_score(string classname, string ID){
         cout << setw(10) << left << "Overall GPA" << endl;
         for (int i = 1; i < pos; i++)
         {
-            getline(in, temp);
+            getline(in1, temp);
         }
+        getline(in1, temp, ',');
+        cout << setw(5) << left << temp;
+        getline(in1, temp, ',');
+        cout << setw(15) << left << temp;
+        getline(in1, temp, ',');
+        cout << setw(20) << left << temp;
+        for (int i = 0; i < n; i++)
+        {
+            getline(in1, temp, ',');
+            cout << setw(10) << left << temp;
+        }
+        getline(in1, temp, ',');
+        cout << setw(10) << left << temp;
+        getline(in1, temp);
+        cout << setw(10) << left << temp;
+    }
+}
+
+//This is for class if staff want the old year
+void find_score_class(string classname){
+    string class_old = classname + "_scores.csv";
+    ifstream in(class_old);
+    if (!in.is_open()){
+        cout<<"Error! This class does not exist"<<endl;
+        return;
+    }
+    string temp;
+    cout << classname << endl;
+    cout << setw(5) << left << "Num" << setw(15) << left << "Student ID" << setw(20) << left << "Student name";
+    getline(in, temp, ',');
+    getline(in, temp, ',');
+    getline(in, temp, ',');
+    int n = 0;
+    while (in.peek() != '\n' || in.peek() != '\r'){
+        getline(in, temp, ',');
+        cout << setw(40) << left << temp;
+        n++;
+    }
+    getline(in, temp);
+    for (int i = 0; i < n; i++)
+    {
+        cout << setw(10) << left << "Other" << setw(10) << left << "Mid term" << setw(10) << left << "Final" << setw(10) << left << "Total";
+    }
+    cout << setw(10) << left << "GPA";
+    cout << setw(10) << left << "Overall GPA" << endl;
+    while (!in.eof()){
         getline(in, temp, ',');
         cout << setw(5) << left << temp;
         getline(in, temp, ',');
@@ -261,6 +307,7 @@ void find_score(string classname, string ID){
         getline(in, temp, ',');
         cout << setw(10) << left << temp;
         getline(in, temp);
-        getline(in, temp, ',');
+        cout << setw(10) << left << temp;
     }
+    in.close();
 }
