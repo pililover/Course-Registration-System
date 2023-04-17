@@ -56,6 +56,15 @@ user *register_acc()
     cin >> acc->username;
     cout << "Password (Do not have space character): " << endl;
     cin >> acc->password;
+    if (acc->type_of_user == 1)
+    {
+        cout << "Student ID (Do not have space character): " << endl;
+        cin >> acc->ID;
+    }
+    else
+    {
+        acc->ID = "No_ID";
+    }
     return acc;
 }
 
@@ -108,7 +117,7 @@ int check_available_acc(node *accHead, user *newacc)
     return 0;
 }
 
-int check_login(node *accHead, string &u_name, string &pass, int &usertype)
+int check_login(node *accHead, string &u_name, string &pass, int &usertype, string &ID)
 {
     node *p = accHead;
     while (p != nullptr)
@@ -116,6 +125,7 @@ int check_login(node *accHead, string &u_name, string &pass, int &usertype)
         if (p->data->username == u_name && p->data->password == pass)
         {
             usertype = p->data->type_of_user;
+	    ID = p->data->ID;
             return 1;
         }
         p = p->next;
@@ -123,16 +133,16 @@ int check_login(node *accHead, string &u_name, string &pass, int &usertype)
     return 0;
 }
 
-void login(node *accHead, string &u_name, string &pass, int &usertype, int &access)
+void login(node *accHead, string &u_name, string &pass, int &usertype, int &access, string &ID)
 {
     cout << "Username: ";
     cin >> u_name;
     cout << "Password: ";
     cin >> pass;
-    if (check_login(accHead, u_name, pass, usertype))
+    if (check_login(accHead, u_name, pass, usertype, ID))
     {
         cout << "Log in succefully!" << endl;
-		access = 1;
+	access = 1;
     }
     else
     {
