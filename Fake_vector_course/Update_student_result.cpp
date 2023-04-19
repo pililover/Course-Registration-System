@@ -3,20 +3,22 @@
 void update_student_result(SchoolYear *school_year)
 {
     string courseid, stuid;
+    int check = 0;
     cout << "Enter Student ID: ";
     cin >> stuid;
     cout << "Enter CourseID: ";
     cin >> courseid;
     Course *course = nullptr;
-
     for (int i = 0; i < school_year->data_semester[school_year->current_semester].course_num; i++)
+    {
         if (courseid == school_year->data_semester[school_year->current_semester].data_course[i].course_id)
         {
             course = &(school_year->data_semester[school_year->current_semester].data_course[i]);
+            check = 1;
             break;
         }
-
-    if (course == 0)
+    }
+    if (check == 0)
     {
         cout << "CourseID does not exist" << endl;
         return;
