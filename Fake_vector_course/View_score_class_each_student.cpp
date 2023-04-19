@@ -311,3 +311,77 @@ void find_score_class(string classname){
     }
     in.close();
 }
+
+//To csv file only
+void class_to_csv(Classes *classes, Semester semester, string show)
+{
+    string temp = show + "_scores.csv";
+    ofstream in(temp, ios::app);
+
+    // The second line is the score
+    for (int i = 0; i < semester.course_num; i++)
+    {
+        int flag = 1;
+        for (int j = 0; j < semester.data_course[i].size_student; j++)
+        {
+            if (semester.data_course[i].enrolled_student[j].studentID == show)
+            {
+                flag = 0;
+                in << semester.data_course[i].enrolled_student[j].other << ',';
+                in << semester.data_course[i].enrolled_student[j].midterm << ',';
+                in << semester.data_course[i].enrolled_student[j].final << ',';
+                in << semester.data_course[i].enrolled_student[j].score << ',';
+            }
+        }
+
+        if (flag == 1)
+        {
+            in << 'X' << ',' << 'X' << ',' << 'X' << ',' << 'X' << ',';
+        }
+    }
+    for (int i = 0; i < classes->student_num; i++)
+    {
+        if (classes->data_student[i].studentID == show)
+        {
+            in << classes->data_student[i].score << "," << classes->data_student[i].gpa_4_year << endl;
+        }
+    }
+
+    in.close();
+}
+
+void class_to_csv(SchoolYear *year, Classes *classes, int cur){
+    string temp = classes->class_name + "_scores.csv";
+
+    ofstream in(temp);
+    // The first line in csv is the courses names
+    in << "Num,"
+       << "Student ID,"
+       << "Student name,";
+    for (int i = 0; i < year->data_semester[cur].course_num; i++)
+    {
+        in << year->data_semester[cur].data_course[i].course_name << ',';
+    }
+    in << endl;
+    in << "Score type,X,X,";
+    for (int i = 0; i < year->data_semester[cur].course_num; i++)
+    {
+        in << "Other,"
+           << "Mid term,"
+           << "Final,"
+           << "Total,";
+    }
+    in << "GPA," << endl;
+    in << "Overall GPA," << endl;
+    in.close();
+
+    for (int i = 0; i < classes->student_num; i++)
+    {
+        ofstream in1(temp, ios::app);
+        in1 << classes->data_student[i].student_num << ',';
+        in1 << classes->data_student[i].studentID << ',';
+        in1 << classes->data_student[i].firstname << ' ' << classes->data_student[i].lastname << ',';
+        in1.close();
+        class_to_csv(classes, year->data_semester[cur], classes->data_student[i].studentID);
+    }
+}
