@@ -94,7 +94,7 @@ void show_score_semester_student(Classes *classes, Semester semester, string sho
     in.close();
 }
 
-//The old version, new version is find_score
+// The old version, new version is find_score
 void show_score_student(SchoolYear *year, int cur, Classes *classes, string show)
 {
     string temp = show + "_scores.csv";
@@ -196,12 +196,14 @@ void show_scores_class(SchoolYear *year, Classes *classes, int cur)
     }
 }
 
-//Not tested yet
-void find_score_student(string classname, string ID){
+// Not tested yet
+void find_score_student(string classname, string ID)
+{
     string class_old = classname + "_scores.csv";
     ifstream in(class_old);
-    if (!in.is_open()){
-        cout<<"Error! This class does not exist"<<endl;
+    if (!in.is_open())
+    {
+        cout << "Error! This class does not exist" << endl;
         return;
     }
 
@@ -209,10 +211,12 @@ void find_score_student(string classname, string ID){
     string temp;
     getline(in, temp);
     getline(in, temp);
-    while (!in.eof()){
+    while (!in.eof())
+    {
         getline(in, temp, ',');
         getline(in, temp, ',');
-        if (temp == ID){
+        if (temp == ID)
+        {
             exist = 1;
             break;
         }
@@ -220,18 +224,21 @@ void find_score_student(string classname, string ID){
         pos++;
     }
     in.close();
-    
-    if (exist == 0){
-        cout << "This ID does not exist in this class"<<endl;
+
+    if (exist == 0)
+    {
+        cout << "This ID does not exist in this class" << endl;
     }
-    else{
+    else
+    {
         ifstream in1(class_old);
         cout << setw(5) << left << "Num" << setw(15) << left << "Student ID" << setw(20) << left << "Student name";
         getline(in1, temp, ',');
         getline(in1, temp, ',');
         getline(in1, temp, ',');
         int n = 0;
-        while (in1.peek() != '\n' || in1.peek() != '\r'){
+        while (in1.peek() != '\n' || in1.peek() != '\r')
+        {
             getline(in1, temp, ',');
             cout << setw(40) << left << temp;
             n++;
@@ -265,12 +272,14 @@ void find_score_student(string classname, string ID){
     }
 }
 
-//This is for class if staff want the old year
-void find_score_class(string classname){
+// This is for class if staff want the old year
+void find_score_class(string classname)
+{
     string class_old = classname + "_scores.csv";
     ifstream in(class_old);
-    if (!in.is_open()){
-        cout<<"Error! This class does not exist"<<endl;
+    if (!in.is_open())
+    {
+        cout << "Error! This class does not exist" << endl;
         return;
     }
     string temp;
@@ -280,7 +289,8 @@ void find_score_class(string classname){
     getline(in, temp, ',');
     getline(in, temp, ',');
     int n = 0;
-    while (in.peek() != '\n' || in.peek() != '\r'){
+    while (in.peek() != '\n' || in.peek() != '\r')
+    {
         getline(in, temp, ',');
         cout << setw(40) << left << temp;
         n++;
@@ -292,7 +302,8 @@ void find_score_class(string classname){
     }
     cout << setw(10) << left << "GPA";
     cout << setw(10) << left << "Overall GPA" << endl;
-    while (!in.eof()){
+    while (!in.eof())
+    {
         getline(in, temp, ',');
         cout << setw(5) << left << temp;
         getline(in, temp, ',');
@@ -312,7 +323,7 @@ void find_score_class(string classname){
     in.close();
 }
 
-//To csv file only
+// To csv file only
 void class_to_csv(Classes *classes, Semester semester, string show)
 {
     string temp = show + "_scores.csv";
@@ -350,7 +361,8 @@ void class_to_csv(Classes *classes, Semester semester, string show)
     in.close();
 }
 
-void class_to_csv(SchoolYear *year, Classes *classes, int cur){
+void class_to_csv(SchoolYear *year, Classes *classes, int cur)
+{
     string temp = classes->class_name + "_scores.csv";
 
     ofstream in(temp);
