@@ -56,38 +56,41 @@ void import_scoreboard_of_a_course(SchoolYear *school_year)
         getline(fin, stuid, ',');
         getline(fin, stufirstname, ',');
         getline(fin, stulastname, ',');
-        
+
         getline(fin, stu_score, ',');
-        if (!isdigit(stu_score[0])) {
-            cout<<"File doesn't have at least a other score. Import unsuccessful. ";
+        if (!isdigit(stu_score[0]))
+        {
+            cout << "File doesn't have at least a other score. Import unsuccessful. ";
             fin.close();
             return;
         }
         other = stof(stu_score);
         course->enrolled_student[stt].other = other;
-        
+
         getline(fin, stu_score, ',');
-        if (!isdigit(stu_score[0])) {
-            cout<<"File doesn't have at least a midterm score. Import unsuccessful. ";
+        if (!isdigit(stu_score[0]))
+        {
+            cout << "File doesn't have at least a midterm score. Import unsuccessful. ";
             fin.close();
             return;
         }
         midterm = stof(stu_score);
         course->enrolled_student[stt].midterm = midterm;
-        
+
         getline(fin, stu_score, '\n');
-        if (!isdigit(stu_score[0])) {
-            cout<<"File doesn't have at least a final score. Import unsuccessful. ";
+        if (!isdigit(stu_score[0]))
+        {
+            cout << "File doesn't have at least a final score. Import unsuccessful. ";
             fin.close();
             return;
         }
         final = stof(stu_score);
         course->enrolled_student[stt].final = final;
-        
+
         total = final * percentage_final / 100 + midterm * percentage_midterm / 100 + other * percentage_other / 100;
         course->enrolled_student[stt].score = total;
         stt++;
     }
-    cout<<"Import successful. ";
+    cout << "Import successful. ";
     fin.close();
 }
