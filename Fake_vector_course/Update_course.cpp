@@ -79,19 +79,20 @@ void update_course(Course *&update, SchoolYear *&year)
             int stop = 1;
             while (x < update->size_student - 1 && stop != 0)
             {
-                x++;
                 if (update->enrolled_student[x].studentID == temp_remove)
                 {
                     stop = 0;
-                    for (int n = x; n < update->size_student; n++)
+                    for (int n = x; n < update->size_student - 1; n++)
                     {
                         update->enrolled_student[n] = update->enrolled_student[n + 1];
                     }
+                    break;
                 }
+                x++;
             }
-            if (x == update->size_student - 1)
+            if (x == update->size_student - 1 && update->enrolled_student[x].studentID == temp_remove)
             {
-                update->enrolled_student[update->size_student - 1].studentID = "0";
+                update->enrolled_student[x].studentID = "0";
                 stop = 0;
             }
             if (stop == 0)
