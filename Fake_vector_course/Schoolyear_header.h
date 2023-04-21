@@ -133,5 +133,7 @@ void cal_GPA_current(SchoolYear *year, Classes *classes, int cur);
 void show_score_semester_student(Classes *classes, Semester semester, string show);
 void show_score_student(SchoolYear *year, int cur, Classes *classes, string show);
 void show_scores_class(SchoolYear *year, Classes *classes, int cur);
+void find_score_class(string classname);
+void find_score_student(string classname, string ID);
 
 #endif

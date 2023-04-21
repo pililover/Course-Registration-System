@@ -17,6 +17,7 @@ int main()
     read_file_acc(accHead);
     do
     {
+    loginPage:
         switch (access)
         {
         case 0: // biến dùng để check đã login hay chưa
@@ -79,9 +80,9 @@ int main()
                 if (usertype == 0)
                 {
                     cout << "6. Create school year" << endl;
-                    cout << "7. Add class to school year" << endl;
+                    cout << "7. Add class to current school year" << endl;
                     cout << "8. Add new student to class" << endl;
-                    cout << "9. Import students from csv file to class" << endl;
+                    cout << "9. Import students from csv file to class in current school year" << endl;
                     cout << endl;
                     cout << "10. Create semester" << endl;
                     cout << "11. Add course to current semester" << endl;
@@ -565,36 +566,10 @@ int main()
                     case 6:
                     {
                         system("CLEAR");
-                        string stuid, classname;
-                        Classes *cur_class1 = nullptr; // lớp cần xem điểm
-                        int cur_semester;              // học kỳ cần xem điểm
-                        cout << "Enter Student ID: ";
-                        cin >> stuid;
+                        string classname;
                         cout << "Enter class name: ";
                         cin >> classname;
-                        for (int i = 0; i < systems.year_num; i++)
-                        {
-                            for (int j = 0; j < systems.data_schoolyear[i].class_num; j++)
-                            {
-                                if (classname == systems.data_schoolyear[i].data_classes[j].class_name)
-                                {
-                                    cur_class1 = &(systems.data_schoolyear[i].data_classes[j]);
-                                    // Vòng lặp này để tính gpa của mọi năm của lớp để tránh bị segmentation fault
-                                    for (int z = 0; z < systems.year_num; z++)
-                                    {
-                                        for (int k = 0; k < systems.data_schoolyear[z].semester_num; k++)
-                                        {
-                                            SchoolYear *temp = &(systems.data_schoolyear[i]);
-                                            cal_GPA_current(temp, cur_class1, k);
-                                        }
-                                    }
-                                    cur_semester = systems.data_schoolyear[i].current_semester;
-                                    cal_GPA_all_student_in_class(systems, cur_class1);
-                                    show_score_student(school_year, cur_semester, cur_class1, stuid);
-                                    break;
-                                }
-                            }
-                        }
+                        find_score_student(classname, ID);
                         break;
                     }
                     case 0:
@@ -612,7 +587,9 @@ int main()
             if (access == 0)
             {
                 cout << "You have loged out. Please come back to the login page.";
-                op2 = 0;
+                goto loginPage;
+
+                // op2 = 0;
             }
         }
         }
