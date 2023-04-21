@@ -102,6 +102,7 @@ int main()
                     cout << "22. Update student's result" << endl;
                     cout << endl;
                     cout << "23. View the scoreboard of a class, including final marks of all courses in the semester, GPA in this semester, and the overall GPA" << endl;
+                    cout << "24. View the scoreboard of a class, including final marks of all courses in the semester, GPA in this semester, and the overall GPA (From old data)" << endl;
                 }
                 else
                     cout << "6. View student own scoreboard (after the scoreboard has been published)" << endl;
@@ -530,6 +531,15 @@ int main()
                         }
                         break;
                     }
+                    case 24:
+                    {
+                        system("CLEAR");
+                        string classname;
+                        cout << "Enter class name: ";
+                        cin >> classname;
+                        find_score_class(classname);
+                        break;
+                    }
                     case 0:
                     {
                         break;
@@ -599,6 +609,8 @@ int main()
     {
         for (int i = 0; i < school_year->class_num; i++)
         {
+            Classes* temp = &(school_year->data_classes[i]);
+            class_to_csv_1(school_year, temp, school_year->current_semester);
             delete[] school_year->data_classes[i].data_student;
         }
         delete[] school_year->data_classes;
