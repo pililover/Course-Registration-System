@@ -195,7 +195,7 @@ void show_scores_class(SchoolYear *year, Classes *classes, int cur)
     for (int i = 0; i < classes->student_num; i++)
     {
         ofstream in1(temp, ios::app);
-        in1 << i + 1 << ',';
+        in1 << classes->data_student[i].student_num << ',';
         cout << setw(5) << left << classes->data_student[i].student_num;
         in1 << classes->data_student[i].studentID << ',';
         cout << setw(15) << left << classes->data_student[i].studentID;
@@ -245,19 +245,7 @@ void find_score_student(string classname, string ID)
     {
         ifstream in1(class_old);
         cout << setw(5) << left << "Num" << setw(15) << left << "Student ID" << setw(20) << left << "Student name";
-        /*getline(in1, temp, ',');
-        getline(in1, temp, ',');
-        getline(in1, temp, ',');*/
         int n = 0;
-        // in1 >> c;
-        //  while (in1.peek() != '\n' || in1.peek() != '\r')
-        /*while ((in1.peek() - 1 != '\n' || in1.peek() - 1 != '\r') && !in1.eof())
-        {
-            getline(in1, temp, ',');
-            // in1 >> c;
-            cout << setw(40) << left << temp;
-            n++;
-        }*/
         string linecourse, allcourse, c;
         getline(in1, linecourse);
         int posx = linecourse.find("Student name") + 13;
@@ -360,9 +348,8 @@ void find_score_class(string classname)
     cout << setw(10) << left << "Overall GPA" << endl;
     while (!in.eof())
     {
-        int i = 1;
         getline(in, temp, ',');
-        cout << setw(5) << left << i;
+        cout << setw(5) << left << temp;
         getline(in, temp, ',');
         cout << setw(15) << left << temp;
         getline(in, temp, ',');
@@ -376,7 +363,6 @@ void find_score_class(string classname)
         cout << setw(10) << left << temp;
         getline(in, temp);
         cout << setw(10) << left << temp;
-        i++;
     }
     in.close();
 }
