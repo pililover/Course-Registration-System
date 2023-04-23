@@ -91,7 +91,7 @@ void resize_class(Classes *&arr, int new_capacity)
     arr->student_capacity = new_capacity;
 }
 
-bool check_valid_classname(SchoolYear *school_year, string classname)
+/*bool check_valid_classname(SchoolYear *school_year, string classname)
 {
     for (int i = 0; i < school_year->class_num; i++)
     {
@@ -101,32 +101,36 @@ bool check_valid_classname(SchoolYear *school_year, string classname)
         }
     }
     return false;
-}
+}*/
 
-bool check_classname_in_a_year(SchoolYear year, string classname, int &index){
-	for(int i=0; i < year.class_num; i++){
-		if(year.data_classes[i].class_name == classname)
-		{
-			index = i;
-			return true;
-		}
-	}
-	return false;
+bool check_classname_in_a_year(SchoolYear year, string classname, int &index)
+{
+    for (int i = 0; i < year.class_num; i++)
+    {
+        if (year.data_classes[i].class_name == classname)
+        {
+            index = i;
+            return true;
+        }
+    }
+    return false;
 }
 
 void add_class_to_schoolyear(System system, SchoolYear *school_year, string classname)
 {
     int check;
-    do{
-	check=-1;
-	for(int i=0; i<system.year_num; i++)
-		if(check_classname_in_a_year(system.data_schoolyear[i], classname, check))
-		{
-               		cout<<" Already have this class. Please use a new class name: ";
-               		cin>>classname; break;
-            	}
-	}while(check!=-1);
-    
+    do
+    {
+        check = -1;
+        for (int i = 0; i < system.year_num; i++)
+            if (check_classname_in_a_year(system.data_schoolyear[i], classname, check))
+            {
+                cout << "Already have this class. Please use a new class name: ";
+                cin >> classname;
+                break;
+            }
+    } while (check != -1);
+
     Classes *new_class = nullptr;
     init_class(new_class);
     new_class->class_name = classname;
@@ -134,12 +138,6 @@ void add_class_to_schoolyear(System system, SchoolYear *school_year, string clas
     cout << "Class " << school_year->data_classes[school_year->class_num - 1].class_name << " added to SchoolYear " << school_year->year_name << "." << endl;
 }
 
-/*void view_class_in_schoolyear(SchoolYear *school_year) // thêm vào để check thôi chứ không có trong yêu cầu
-{
-    for (int i = 0; i < school_year->class_num; i++)
-        cout << school_year->data_classes[i].class_name << endl;
-}
-*/
 void view_school_year_and_class_in_each_year(System system)
 {
     for (int i = 0; i < system.year_num; i++)
@@ -157,6 +155,12 @@ void view_school_year_and_class_in_each_year(System system)
         }
     }
 }
+/*void view_class_in_schoolyear(SchoolYear *school_year) // thêm vào để check thôi chứ không có trong yêu cầu
+{
+    for (int i = 0; i < school_year->class_num; i++)
+        cout << school_year->data_classes[i].class_name << endl;
+}
+*/
 /*void view_class_in_schoolyear(SchoolYear *school_year) // thêm vào để check thôi chứ không có trong yêu cầu
 {
     for (int i = 0; i < school_year->class_num; i++)
