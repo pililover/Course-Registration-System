@@ -82,7 +82,8 @@ void read_file_acc(node *&accHead)
         getline(inp, u_type, ',');
         already_acc->type_of_user = stoi(u_type);
         getline(inp, already_acc->username, ',');
-        getline(inp, already_acc->password, '\n');
+        getline(inp, already_acc->password, ',');
+        getline(inp, already_acc->ID, '\n');
 
         node *temp = createnode(already_acc);
 
@@ -125,7 +126,7 @@ int check_login(node *accHead, string &u_name, string &pass, int &usertype, stri
         if (p->data->username == u_name && p->data->password == pass)
         {
             usertype = p->data->type_of_user;
-	    ID = p->data->ID;
+            ID = p->data->ID;
             return 1;
         }
         p = p->next;
@@ -142,7 +143,7 @@ void login(node *accHead, string &u_name, string &pass, int &usertype, int &acce
     if (check_login(accHead, u_name, pass, usertype, ID))
     {
         cout << "Log in succefully!" << endl;
-	access = 1;
+        access = 1;
     }
     else
     {
@@ -163,7 +164,8 @@ void print_in_file(node *accHead)
             ip << "STUDENT" << endl;*/
         ip << accHead->data->type_of_user << ',';
         ip << accHead->data->username << ',';
-        ip << accHead->data->password << endl;
+        ip << accHead->data->password << ',';
+        ip << accHead->data->ID << endl;
         accHead = accHead->next;
     }
     ip.close();
@@ -197,6 +199,7 @@ void display_profile(node *accHead, string u_name, string pass) // đợi lúc c
                 cout << "STUDENT" << endl;
             cout << "Username: " << accHead->data->username << endl;
             cout << "Password: " << accHead->data->password << endl;
+            cout << "ID: " << accHead->data->ID << endl;
         }
         accHead = accHead->next;
     }
