@@ -93,19 +93,23 @@ int main()
                     cout << "15. View list of class" << endl;
                     cout << "16. View student in a class" << endl;
                     cout << endl;
-                    cout << "17. View list of courses" << endl;
-                    cout << "18. View list of students in a course" << endl;
-                    cout << "19. Export list of students in a course to CSV file" << endl;
+                    cout << "17. View list of courses in current semester" << endl;
+                    cout << "18. View list of courses in a school year" << endl;
+                    cout << "19. View list of students in a course" << endl;
+                    cout << "20. Export list of students in a course to CSV file" << endl;
                     cout << endl;
-                    cout << "20. Import scoreboard of a course" << endl;
-                    cout << "21. View scoreboard of a course" << endl;
-                    cout << "22. Update student's result" << endl;
+                    cout << "21. Import scoreboard of a course" << endl;
+                    cout << "22. View scoreboard of a course" << endl;
+                    cout << "23. Update student's result" << endl;
                     cout << endl;
-                    cout << "23. View the scoreboard of a class, including final marks of all courses in the semester, GPA in this semester, and the overall GPA" << endl;
-                    cout << "24. View the scoreboard of a class, including final marks of all courses in the semester, GPA in this semester, and the overall GPA (From old data)" << endl;
+                    cout << "24. View the scoreboard of a class, including final marks of all courses in the semester, GPA in this semester, and the overall GPA" << endl;
+                    cout << "25. View the scoreboard of a class, including final marks of all courses in the semester, GPA in this semester, and the overall GPA (From old data)" << endl;
                 }
                 else
-                    cout << "6. View student own scoreboard (after the scoreboard has been published)" << endl;
+                {
+                    cout << "6. View student own registered courses" << endl;
+                    cout << "7. View student own scoreboard (after the scoreboard has been published)" << endl;
+                }
                 cout << "0. Exit" << endl;
                 cout << "OPTION: ";
                 cin >> op2;
@@ -365,6 +369,15 @@ int main()
                     case 18:
                     {
                         system("CLEAR");
+                        string year_name;
+                        cout << "School year: ";
+                        cin >> year_name;
+                        view_course_in_schoolyear(systems, year_name);
+                        break;
+                    }
+                    case 19:
+                    {
+                        system("CLEAR");
                         if (!school_year)
                         {
                             cout << "No school year available" << endl;
@@ -399,7 +412,7 @@ int main()
                         }
                         break;
                     }
-                    case 19:
+                    case 20:
                     {
                         system("CLEAR");
                         if (!school_year)
@@ -435,7 +448,7 @@ int main()
                         }
                         break;
                     }
-                    case 20:
+                    case 21:
                     {
                         system("CLEAR");
                         if (!school_year)
@@ -456,7 +469,7 @@ int main()
                         import_scoreboard_of_a_course(school_year);
                         break;
                     }
-                    case 21:
+                    case 22:
                     {
                         system("CLEAR");
                         if (!school_year)
@@ -477,7 +490,7 @@ int main()
                         view_scoreboard_of_a_course(school_year);
                         break;
                     }
-                    case 22:
+                    case 23:
                     {
                         system("CLEAR");
                         if (!school_year)
@@ -498,7 +511,7 @@ int main()
                         update_student_result(school_year);
                         break;
                     }
-                    case 23:
+                    case 24:
                     {
                         system("CLEAR");
                         string classname;
@@ -531,7 +544,7 @@ int main()
                         }
                         break;
                     }
-                    case 24:
+                    case 25:
                     {
                         system("CLEAR");
                         string classname;
@@ -576,6 +589,12 @@ int main()
                     case 6:
                     {
                         system("CLEAR");
+                        personal_registered_course(school_year, ID);
+                        break;
+                    }
+                    case 7:
+                    {
+                        system("CLEAR");
                         string classname;
                         cout << "Enter class name: ";
                         cin >> classname;
@@ -605,27 +624,34 @@ int main()
         }
     } while (op1 != 0 && op2 != 0);
 
-    if (school_year != NULL)
+    for (int k = 0; k < systems.year_capacity; k++)
     {
+        for (int i = 0; i < systems.data_schoolyear[k].class_capacity; i++)
+        {
+            delete[] systems.data_schoolyear[k].data_classes[i].data_student;
+        }
+        delete[] systems.data_schoolyear[k].data_classes;
+    }
+    /*{
         for (int i = 0; i < school_year->class_num; i++)
         {
-            Classes* temp = &(school_year->data_classes[i]);
+            Classes *temp = &(school_year->data_classes[i]);
             class_to_csv_1(school_year, temp, school_year->current_semester);
             delete[] school_year->data_classes[i].data_student;
         }
         delete[] school_year->data_classes;
-    }
-    if (school_year != nullptr)
+    }*/
+    for (int k = 0; k < systems.year_num; k++)
     {
-        for (int i = 0; i < school_year->semester_capacity; i++)
+        for (int i = 0; i < systems.data_schoolyear[k].semester_capacity; i++)
         {
-            for (int j = 0; j < school_year->data_semester[i].course_capacity; j++)
+            for (int j = 0; j < systems.data_schoolyear[k].data_semester[i].course_capacity; j++)
             {
-                delete[] school_year->data_semester[i].data_course[j].enrolled_student;
+                delete[] systems.data_schoolyear[k].data_semester[i].data_course[j].enrolled_student;
             }
-            delete[] school_year->data_semester[i].data_course;
+            delete[] systems.data_schoolyear[k].data_semester[i].data_course;
         }
-        delete[] school_year->data_semester;
+        delete[] systems.data_schoolyear->data_semester;
     }
     // delete school_year;
     delete[] systems.data_schoolyear;
