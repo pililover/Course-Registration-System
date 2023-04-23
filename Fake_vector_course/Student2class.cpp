@@ -87,20 +87,3 @@ bool check_class_is_empty(SchoolYear *school_year)
         return true;
     return false;
 }
-
-/*void view_student_in_class(SchoolYear *school_year)
-{
-    for (int i = 0; i < school_year->class_num; i++)
-    {
-        cout << school_year->data_classes[i].class_name << endl;
-        if (school_year->data_classes[i].student_num != 0)
-        {
-            for (int j = 0; j < school_year->data_classes[i].student_num; j++)
-            {
-                cout << school_year->data_classes[i].data_student[j].studentID << " \t"
-                     << school_year->data_classes[i].data_student[j].firstname << " \t"
-                     << school_year->data_classes[i].data_student[j].lastname << endl;
-            }
-        }
-    }
-}*/
