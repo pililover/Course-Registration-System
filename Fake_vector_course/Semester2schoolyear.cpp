@@ -54,7 +54,7 @@ void resize_semeter(Semester *&arr, int new_capacity)
 void create_semester(System systems, Semester sem)
 {
     string school_year_id;
-    cout << "Chose school year to create semester:";
+    cout << "Choose school year to create semester: ";
     cin >> school_year_id;
     SchoolYear *year = nullptr;
     int check = 0;
