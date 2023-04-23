@@ -78,7 +78,6 @@ struct System
 // Schoolyear.cpp
 void init_system(System &arr);
 void resize_school_year(SchoolYear *&arr, int new_capacity);
-// SchoolYear *create_school_year(string year_name);
 void push_back_schoolyear(System &arr, SchoolYear *value);
 void create_school_year(System &system, string year_name);
 void view_school_year_and_class_in_each_year(System system);
@@ -86,10 +85,8 @@ void view_school_year_and_class_in_each_year(System system);
 void push_back_class(SchoolYear *&arr, Classes *value);
 void init_class(Classes *&arr);
 void resize_class(Classes *&arr, int new_capacity);
-bool check_valid_classname(SchoolYear *school_year, string classname);
 bool check_classname_in_a_year(SchoolYear year, string classname, int &index);
 void add_class_to_schoolyear(System system, SchoolYear *school_year, string classname);
-// void view_class_in_schoolyear(SchoolYear *school_year); // thêm vào để check thôi chứ không có trong yêu cầu// void view_class_in_schoolyear(SchoolYear *school_year); // thêm vào để check thôi chứ không có trong yêu cầu
 void view_class_in_schoolyear(System system);
 
 // Student2class.cpp
@@ -97,7 +94,6 @@ void push_back_student_to_class(Classes *&arr, Student value);
 void import_students_csv_to_class(SchoolYear *&school_year, string classname, string filename);
 void input_student_to_class(SchoolYear *&school_year, string classname);
 bool check_class_is_empty(SchoolYear *school_year);
-// void view_student_in_class(SchoolYear *school_year);
 void view_student_in_class(System system);
 
 // void init_semester_in_schoolyear(SchoolYear *&arr);
@@ -112,6 +108,7 @@ void resize_course(Course *&arr, int new_capacity);
 void push_back_course(Semester *&arr, Course *value);
 void add_course_to_semester(Semester *&arr, Course value);
 void view_couse_in_semester(SchoolYear *school_year);
+void view_course_in_schoolyear(System systems, string year_name);
 
 void push_back_student_to_course(Course *&arr, Student value);
 void import_students_csv_to_course(SchoolYear *&school_year, string filename, string courseid);
@@ -127,6 +124,7 @@ void export_student_from_course_to_file(SchoolYear *school_year, string courseid
 void import_scoreboard_of_a_course(SchoolYear *school_year);
 void view_scoreboard_of_a_course(SchoolYear *school_year);
 void update_student_result(SchoolYear *school_year);
+void personal_registered_course(SchoolYear *school_year, string ID);
 
 void cal_GPA_all_student_in_class(System &system, Classes *classes);
 void cal_GPA_current(SchoolYear *year, Classes *classes, int cur);
