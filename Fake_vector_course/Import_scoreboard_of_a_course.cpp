@@ -50,6 +50,10 @@ void import_scoreboard_of_a_course(SchoolYear *school_year)
     string stufirstname;
     string stulastname;
     string stu_score;
+    //percentage_other = 0;
+    course->percent_other = percentage_other;
+    course->percent_midterm = percentage_midterm;
+    course->percent_final = percentage_final;
     while (!fin.eof())
     {
         getline(fin, stunum, ',');
