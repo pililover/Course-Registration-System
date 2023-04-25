@@ -95,7 +95,7 @@ void view_student_in_class(System system)
 		 << "Social ID" << endl;
 	for (int i = 0; i < school_year->data_classes[index].student_num; i++)
 	{
-		cout << setw(4) << left << school_year->data_classes[index].data_student[i].student_num;
+		cout << setw(4) << left << i + 1;
 		cout << setw(12) << left << school_year->data_classes[index].data_student[i].studentID;
 		cout << setw(15) << left << school_year->data_classes[index].data_student[i].firstname;
 		cout << setw(15) << left << school_year->data_classes[index].data_student[i].lastname;
