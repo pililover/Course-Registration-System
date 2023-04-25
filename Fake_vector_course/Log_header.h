@@ -7,6 +7,7 @@
 #include <fstream>
 #include <cstdio>
 #include <sstream>
+#include <windows.h>
 
 using namespace std;
 
@@ -38,5 +39,7 @@ void print_in_file(node *accHead);
 void deleteall(node *&accHead);
 void display_profile(node *accHead, string u_name, string pass); // đợi lúc có đầy đủ lớp, niên khoá thì add vào
 void change_password(node *accHead, string u_name, string &pass);
+
+void set_color(int code);
 
 #endif
