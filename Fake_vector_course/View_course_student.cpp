@@ -21,7 +21,7 @@ void view_student_in_course(SchoolYear *school_year, int cur_course)
     cout << "\t\t\t\t\t" << school_year->data_semester[school_year->current_semester].data_course[cur_course].course_id << " - "
          << school_year->data_semester[school_year->current_semester].data_course[cur_course].course_name << endl;
     cout << endl;
-    cout << '\t' << '\t' << setw(4) << "No" << setw(5) << ". " << setw(20) << "StudentID" << setw(20) << "Firstname" << setw(20) << "Lastname" << endl;
+    cout << '\t' << '\t' << setw(3) << "No" << setw(5) << ". " << setw(20) << "StudentID" << setw(20) << "Firstname" << setw(20) << "Lastname" << endl;
     if (school_year->data_semester[school_year->current_semester].data_course[cur_course].size_student != 0)
     {
         for (int j = 0; j < school_year->data_semester[school_year->current_semester].data_course[cur_course].size_student; j++)
