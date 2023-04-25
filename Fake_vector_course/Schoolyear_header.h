@@ -36,7 +36,10 @@ struct Course
     string session;
     Student *enrolled_student;
     int size_student = 0; // so luong hoc sinh
-    int capacity_student;
+    int capacity_student = 0;
+    float percent_other = 0;
+    float percent_midterm = 0;
+    float percent_final = 0;
 };
 
 struct Semester
