@@ -196,7 +196,7 @@ void show_scores_class(SchoolYear *year, Classes *classes, int cur)
     {
         ofstream in1(temp, ios::app);
         in1 << classes->data_student[i].student_num << ',';
-        cout << setw(5) << left << classes->data_student[i].student_num;
+        cout << setw(5) << left << i + 1;
         in1 << classes->data_student[i].studentID << ',';
         cout << setw(15) << left << classes->data_student[i].studentID;
         in1 << classes->data_student[i].firstname << ' ' << classes->data_student[i].lastname << ',';
@@ -327,7 +327,7 @@ void find_score_class(string classname)
     string temp;
     cout << setw(50) << right << "Score board of class " << classname << endl;
     cout << setw(5) << left << "Num" << setw(15) << left << "Student ID" << setw(20) << left << "Student name";
-    getline(in, temp, ',');
+    /*getline(in, temp, ',');
     getline(in, temp, ',');
     getline(in, temp, ',');
     int n = 0;
@@ -336,6 +336,27 @@ void find_score_class(string classname)
         getline(in, temp, ',');
         cout << setw(40) << left << temp;
         n++;
+    }*/
+    int n = 0;
+    string linecourse, allcourse, c;
+    getline(in, linecourse);
+    int posx = linecourse.find("Student name") + 13;
+    allcourse = linecourse.substr(posx, linecourse.length() - posx);
+    c = allcourse.substr(0, allcourse.find(','));
+    n = 0;
+    while (c.length() > 0)
+    {
+        cout << setw(40) << left << c;
+        allcourse = allcourse.substr(allcourse.find(',') + 1);
+        c = allcourse.substr(0, allcourse.find(','));
+
+        n++;
+    }
+    cout << endl;
+    if (n == 0)
+    {
+        cout << "No course" << endl;
+        return;
     }
     getline(in, temp);
     cout << endl;
@@ -346,10 +367,12 @@ void find_score_class(string classname)
     }
     cout << setw(10) << left << "GPA";
     cout << setw(10) << left << "Overall GPA" << endl;
+    int k = 1;
     while (!in.eof())
     {
         getline(in, temp, ',');
-        cout << setw(5) << left << temp;
+        cout << setw(5) << left << k;
+        k++;
         getline(in, temp, ',');
         cout << setw(15) << left << temp;
         getline(in, temp, ',');
@@ -358,11 +381,18 @@ void find_score_class(string classname)
         {
             getline(in, temp, ',');
             cout << setw(10) << left << temp;
+            getline(in, temp, ',');
+            cout << setw(10) << left << temp;
+            getline(in, temp, ',');
+            cout << setw(10) << left << temp;
+            getline(in, temp, ',');
+            cout << setw(10) << left << temp;
         }
         getline(in, temp, ',');
         cout << setw(10) << left << temp;
         getline(in, temp);
         cout << setw(10) << left << temp;
+        cout << endl;
     }
     in.close();
 }
