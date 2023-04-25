@@ -72,6 +72,19 @@ void create_semester(System systems, Semester sem)
         cout << "School year not found. Create new semester unsuccessfully." << endl;
         return;
     }
+    
+    for (int i = 0; i < systems.year_num; i++)
+    {
+        for (int j = 0; j < systems.data_schoolyear[i].semester_num; j++)
+        {
+            if (systems.data_schoolyear[i].data_semester[j].semester_id == sem.semester_id)
+            {
+                cout << "Semester already exists. Create new semester unsuccessfully." << endl;
+                return;
+            }
+        }
+    }
+    
     if (year->semester_num <= 3 && year->semester_num >= 0)
     {
         Semester *new_semester = nullptr;
