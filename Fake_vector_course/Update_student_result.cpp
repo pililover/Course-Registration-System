@@ -37,7 +37,7 @@ void update_student_result(SchoolYear *school_year)
     float new_scores = 0;
     cout << "Enter new scores: ";
     cin >> new_scores;
-    float percentage_final = 100;
+    /*float percentage_final = 100;
     float percentage_midterm = 100;
     float percentage_other = 100;
     cout << "Percentage of other (x% > 0): ";
@@ -45,7 +45,7 @@ void update_student_result(SchoolYear *school_year)
     cout << "Percentage of midterm (x% > 0): ";
     cin >> percentage_midterm;
     cout << "Percentage of final (x% > 0): ";
-    cin >> percentage_final;
+    cin >> percentage_final;*/
     for (int i = 0; i < course->size_student; i++)
     {
         if (stuid == course->enrolled_student[i].studentID)
@@ -57,7 +57,7 @@ void update_student_result(SchoolYear *school_year)
             else
                 course->enrolled_student[i].final = new_scores;
             float total = 0;
-            total = course->enrolled_student[i].other * percentage_other / 100 + course->enrolled_student[i].midterm * percentage_midterm / 100 + course->enrolled_student[i].final * percentage_final / 100;
+            total = course->enrolled_student[i].other * course->percent_other / 100 + course->enrolled_student[i].midterm * course->percent_midterm / 100 + course->enrolled_student[i].final * course->percent_final / 100;
             course->enrolled_student[i].score = total;
             cout << "Update successfully" << endl;
             return;
