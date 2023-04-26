@@ -84,6 +84,7 @@ int main()
                 cout << "3. View profile" << endl;
                 cout << "4. Change password" << endl;
                 cout << "5. Log out" << endl;
+		cout << setfill((char)4) << setw(20) << (char)4 << endl;
                 cout << endl;
                 if (usertype == 0)
                 {
@@ -115,14 +116,15 @@ int main()
                     cout << "25. View the scoreboard of a class, including final marks of all courses in the semester, GPA in this semester, and the overall GPA (From old data)" << endl;
                     cout << "0. Exit" <<endl;
                     set_color(12);
-					cout << "OPTION: ";
+		    cout << "OPTION: ";
                     cin >> op2;
-					set_color(15);
+		    set_color(15);
                     switch (op2)
                     {
                     case 3:
                     {
-                        display_profile(accHead, u_name, pass);
+                        system("CLEAR");
+			display_profile(accHead, u_name, pass);
                         break;
                     }
                     case 4:
@@ -569,7 +571,14 @@ int main()
                 }
                 else
                 {
-                    
+                    set_color(11);
+		    cout << "6. View student own registered courses" << endl;
+                    cout << "7. View student own scoreboard (after the scoreboard has been published)" << endl;
+                    cout << "0. Exit" << endl;
+                    set_color(12);
+		    cout << "OPTION: ";
+                    cin >> op2;
+                    set_color(15);
                     switch (op2)
                     {
                     case 3:
@@ -619,10 +628,7 @@ int main()
             } while (op2 != 0 && access != 0);
             if (access == 0)
             {
-                cout << "You have loged out. Please come back to the login page.";
-                goto loginPage;
-
-                // op2 = 0;
+                cout << "You have loged out. Please come back to the login page."<<endl;
             }
         }
         }
