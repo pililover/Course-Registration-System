@@ -158,10 +158,6 @@ void print_in_file(node *accHead)
     while (accHead != nullptr)
     {
         ip << accHead->data->fullname << ',';
-        /*if (head->data->type_of_user == 0)
-            ip << "STAFF" << endl;
-        else
-            ip << "STUDENT" << endl;*/
         ip << accHead->data->type_of_user << ',';
         ip << accHead->data->username << ',';
         ip << accHead->data->password << ',';
