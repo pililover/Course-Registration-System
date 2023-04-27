@@ -1,12 +1,5 @@
 #include "Schoolyear_header.h"
 
-/*void init_semester_in_schoolyear(SchoolYear *&arr)
-{
-    arr->data_semester = new Semester[1]; // for semester
-    arr->semester_num = 0;
-    arr->semester_capacity = 12;
-}*/
-
 void resize_shoolyear_for_semester(SchoolYear *&arr, int new_capacity)
 {
     Semester *new_data = new Semester[new_capacity];
