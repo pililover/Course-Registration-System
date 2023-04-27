@@ -104,58 +104,6 @@ void show_score_semester_student(Classes *classes, Semester semester, string sho
     in.close();
 }
 
-// The old version, new version is find_score
-/*
-void show_score_student(SchoolYear *year, int cur, Classes *classes, string show)
-{
-    string temp = show + "_scores.csv";
-
-    ofstream in(temp);
-    in << "Semester" << cur + 1 << endl;
-    cout << "Semester " << cur + 1 << endl;
-    // The first line in csv is the courses names
-    in << "Num,"
-       << "Student ID,"
-       << "Student name,";
-    cout << setw(5) << left << "Num" << setw(15) << left << "Student ID" << setw(20) << left << "Student name";
-    for (int i = 0; i < year->data_semester[cur].course_num; i++)
-    {
-        in << year->data_semester[cur].data_course[i].course_name << ',';
-        cout << setw(40) << left << year->data_semester[cur].data_course[i].course_name;
-    }
-    in << ",,,";
-    cout << setw(40) << "Score type";
-    for (int i = 0; i < year->data_semester[cur].course_num; i++)
-    {
-        in << "Other,"
-           << "Mid term,"
-           << "Final,"
-           << "Total,";
-        cout << setw(10) << left << "Other" << setw(10) << left << "Mid term" << setw(10) << left << "Final" << setw(10) << left << "Total";
-    }
-    in << "GPA," << endl;
-    cout << setw(10) << left << "GPA" << endl;
-    in << "Overall GPA," << endl;
-    cout << setw(10) << left << "Overall GPA" << endl;
-    in.close();
-    for (int i = 0; i < classes->student_num; i++)
-    {
-        if (classes->data_student[i].studentID == show)
-        {
-            ofstream in1(temp, ios::app);
-            in1 << classes->data_student[i].student_num << ',';
-            cout << setw(5) << left << classes->data_student[i].student_num;
-            in1 << classes->data_student[i].studentID << ',';
-            cout << setw(15) << left << classes->data_student[i].studentID;
-            in1 << classes->data_student[i].firstname << ' ' << classes->data_student[i].lastname << ',';
-            string name = classes->data_student[i].firstname + " " + classes->data_student[i].lastname;
-            cout << setw(20) << left << name;
-            in1.close();
-            show_score_semester_student(classes, year->data_semester[cur], classes->data_student[i].studentID);
-        }
-    }
-}*/
-
 // cur is the current semester
 // use loop to change the semester through cur
 void show_scores_class(SchoolYear *year, Classes *classes, int cur)
@@ -207,7 +155,6 @@ void show_scores_class(SchoolYear *year, Classes *classes, int cur)
     }
 }
 
-// Not tested yet
 void find_score_student(string classname, string ID)
 {
     string class_old = classname + "_scores.csv";
@@ -235,8 +182,7 @@ void find_score_student(string classname, string ID)
         getline(in, temp);
     }
     in.close();
-    // cout << exist << " " << pos << endl;
-    // return;
+
     if (exist == 0)
     {
         cout << "This ID does not exist in this class" << endl;
@@ -266,7 +212,6 @@ void find_score_student(string classname, string ID)
             cout << "No course" << endl;
             return;
         }
-        // cout << setw(40) << left << c.substr(0, c.find(',') - 1) << endl;
         getline(in1, temp);
         cout << setw(40) << left << "Score type";
         for (int i = 0; i < n; i++)
