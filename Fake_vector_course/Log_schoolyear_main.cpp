@@ -113,7 +113,6 @@ int main()
                     cout << "23. Update student's result" << endl;
                     cout << endl; set_color(11);
                     cout << "24. View the scoreboard of a class, including final marks of all courses in the semester, GPA in this semester, and the overall GPA" << endl;
-                    cout << "25. View the scoreboard of a class, including final marks of all courses in the semester, GPA in this semester, and the overall GPA (From old data)" << endl;
                     cout << "0. Exit" <<endl;
                     set_color(12);
 		    cout << "OPTION: ";
@@ -524,38 +523,35 @@ int main()
                         cin >> classname;
                         Classes *cur_class = nullptr; // lớp cần xem điểm
                         int cur_semester;             // học kỳ cần xem điểm
-                        for (int i = 0; i < systems.year_num; i++)
-                        {
-                            for (int j = 0; j < systems.data_schoolyear[i].class_num; j++)
+                        if (systems.year_num >= 1){
+                            for (int i = 0; i < systems.year_num; i++)
                             {
-                                if (classname == systems.data_schoolyear[i].data_classes[j].class_name)
+                                for (int j = 0; j < systems.data_schoolyear[i].class_num; j++)
                                 {
-                                    cur_class = &(systems.data_schoolyear[i].data_classes[j]);
-                                    // Vòng lặp này để tính gpa của mọi năm của lớp để tránh bị segmentation fault
-                                    for (int z = 0; z < systems.year_num; z++)
+                                    if (classname == systems.data_schoolyear[i].data_classes[j].class_name)
                                     {
-                                        for (int k = 0; k < systems.data_schoolyear[z].semester_num; k++)
+                                        cur_class = &(systems.data_schoolyear[i].data_classes[j]);
+                                        // Vòng lặp này để tính gpa của mọi năm của lớp để tránh bị segmentation fault
+                                        for (int z = 0; z < systems.year_num; z++)
                                         {
-                                            SchoolYear *temp = &(systems.data_schoolyear[i]);
-                                            cal_GPA_current(temp, cur_class, k);
+                                            for (int k = 0; k < systems.data_schoolyear[z].semester_num; k++)
+                                            {
+                                                SchoolYear *temp = &(systems.data_schoolyear[i]);
+                                                cal_GPA_current(temp, cur_class, k);
+                                            }
                                         }
+                                        cur_semester = systems.data_schoolyear[i].current_semester;
+                                        cal_GPA_all_student_in_class(systems, cur_class);
+                                        show_scores_class(school_year, cur_class, cur_semester);
+                                        break;
                                     }
-                                    cur_semester = systems.data_schoolyear[i].current_semester;
-                                    cal_GPA_all_student_in_class(systems, cur_class);
-                                    show_scores_class(school_year, cur_class, cur_semester);
-                                    break;
                                 }
                             }
                         }
-                        break;
-                    }
-                    case 25:
-                    {
-                        system("CLEAR");
-                        string classname;
-                        cout << "Enter class name: ";
-                        cin >> classname;
-                        find_score_class(classname);
+                        else{
+                            find_score_class(classname);
+                        }
+                        
                         break;
                     }
                     case 0:
