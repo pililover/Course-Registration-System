@@ -91,18 +91,6 @@ void resize_class(Classes *&arr, int new_capacity)
     arr->student_capacity = new_capacity;
 }
 
-/*bool check_valid_classname(SchoolYear *school_year, string classname)
-{
-    for (int i = 0; i < school_year->class_num; i++)
-    {
-        if (school_year->data_classes[i].class_name == classname)
-        {
-            return true;
-        }
-    }
-    return false;
-}*/
-
 bool check_classname_in_a_year(SchoolYear year, string classname, int &index)
 {
     for (int i = 0; i < year.class_num; i++)
@@ -155,15 +143,3 @@ void view_school_year_and_class_in_each_year(System system)
         }
     }
 }
-/*void view_class_in_schoolyear(SchoolYear *school_year) // thêm vào để check thôi chứ không có trong yêu cầu
-{
-    for (int i = 0; i < school_year->class_num; i++)
-        cout << school_year->data_classes[i].class_name << endl;
-}
-*/
-/*void view_class_in_schoolyear(SchoolYear *school_year) // thêm vào để check thôi chứ không có trong yêu cầu
-{
-    for (int i = 0; i < school_year->class_num; i++)
-        cout << school_year->data_classes[i].class_name << endl;
-}
-*/
