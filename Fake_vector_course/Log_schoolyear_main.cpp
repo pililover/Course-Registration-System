@@ -12,14 +12,14 @@ int main()
 
     string year_name, classname, courseid, filename;
     System systems;
-    init_system(systems);           // kiểm soát full hệ thống
-    SchoolYear *school_year = NULL; // kiểm soát schoolyear hiện tại
+    init_system(systems);           // control system
+    SchoolYear *school_year = NULL; // control current schoolyear
     read_file_acc(accHead);
     do
     {
         switch (access)
         {
-        case 0: // biến dùng để check đã login hay chưa
+        case 0:
         {
             do
             {
@@ -29,7 +29,8 @@ int main()
                 cout << "1. Register" << endl;
                 cout << "2. Log in" << endl;
                 cout << "0. Exit" << endl;
-                set_color(12); cout << "OPTION: ";
+                set_color(12);
+                cout << "OPTION: ";
                 cin >> op1;
                 set_color(15);
                 switch (op1)
@@ -84,7 +85,7 @@ int main()
                 cout << "3. View profile" << endl;
                 cout << "4. Change password" << endl;
                 cout << "5. Log out" << endl;
-		cout << setfill((char)4) << setw(20) << (char)4 << endl;
+                cout << setfill((char)4) << setw(20) << (char)4 << endl;
                 cout << endl;
                 if (usertype == 0)
                 {
@@ -93,37 +94,42 @@ int main()
                     cout << "7. Add class to current school year" << endl;
                     cout << "8. Add new student to class" << endl;
                     cout << "9. Import students from csv file to class in current school year" << endl;
-                    cout << endl; set_color(9);
+                    cout << endl;
+                    set_color(9);
                     cout << "10. Create semester" << endl;
                     cout << "11. Add course to current semester" << endl;
                     cout << "12. Add a student to the course" << endl;
                     cout << "13. Upload CSV file of enrolled students to course" << endl;
                     cout << "14. Update course information " << endl;
-                    cout << endl; set_color(15);
+                    cout << endl;
+                    set_color(15);
                     cout << "15. View list of class" << endl;
                     cout << "16. View student in a class" << endl;
-                    cout << endl; set_color(2);
+                    cout << endl;
+                    set_color(2);
                     cout << "17. View list of courses in current semester" << endl;
                     cout << "18. View list of courses in a school year" << endl;
                     cout << "19. View list of students in a course" << endl;
                     cout << "20. Export list of students in a course to CSV file" << endl;
-                    cout << endl; set_color(10);
+                    cout << endl;
+                    set_color(10);
                     cout << "21. Import scoreboard of a course" << endl;
                     cout << "22. View scoreboard of a course" << endl;
                     cout << "23. Update student's result" << endl;
-                    cout << endl; set_color(11);
+                    cout << endl;
+                    set_color(11);
                     cout << "24. View the scoreboard of a class, including final marks of all courses in the semester, GPA in this semester, and the overall GPA" << endl;
-                    cout << "0. Exit" <<endl;
+                    cout << "0. Exit" << endl;
                     set_color(12);
-		    cout << "OPTION: ";
+                    cout << "OPTION: ";
                     cin >> op2;
-		    set_color(15);
+                    set_color(15);
                     switch (op2)
                     {
                     case 3:
                     {
                         system("CLEAR");
-			display_profile(accHead, u_name, pass);
+                        display_profile(accHead, u_name, pass);
                         break;
                     }
                     case 4:
@@ -523,7 +529,8 @@ int main()
                         cin >> classname;
                         Classes *cur_class = nullptr; // lớp cần xem điểm
                         int cur_semester;             // học kỳ cần xem điểm
-                        if (systems.year_num >= 1){
+                        if (systems.year_num >= 1)
+                        {
                             for (int i = 0; i < systems.year_num; i++)
                             {
                                 for (int j = 0; j < systems.data_schoolyear[i].class_num; j++)
@@ -531,7 +538,6 @@ int main()
                                     if (classname == systems.data_schoolyear[i].data_classes[j].class_name)
                                     {
                                         cur_class = &(systems.data_schoolyear[i].data_classes[j]);
-                                        // Vòng lặp này để tính gpa của mọi năm của lớp để tránh bị segmentation fault
                                         for (int z = 0; z < systems.year_num; z++)
                                         {
                                             for (int k = 0; k < systems.data_schoolyear[z].semester_num; k++)
@@ -548,10 +554,11 @@ int main()
                                 }
                             }
                         }
-                        else{
+                        else
+                        {
                             find_score_class(classname);
                         }
-                        
+
                         break;
                     }
                     case 0:
@@ -568,11 +575,11 @@ int main()
                 else
                 {
                     set_color(11);
-		    cout << "6. View student own registered courses" << endl;
+                    cout << "6. View student own registered courses" << endl;
                     cout << "7. View student own scoreboard (after the scoreboard has been published)" << endl;
                     cout << "0. Exit" << endl;
                     set_color(12);
-		    cout << "OPTION: ";
+                    cout << "OPTION: ";
                     cin >> op2;
                     set_color(15);
                     switch (op2)
@@ -624,7 +631,7 @@ int main()
             } while (op2 != 0 && access != 0);
             if (access == 0)
             {
-                cout << "You have loged out. Please come back to the login page."<<endl;
+                cout << "You have loged out. Please come back to the login page." << endl;
             }
         }
         }
@@ -638,15 +645,7 @@ int main()
         }
         delete[] systems.data_schoolyear[k].data_classes;
     }
-    /*{
-        for (int i = 0; i < school_year->class_num; i++)
-        {
-            Classes *temp = &(school_year->data_classes[i]);
-            class_to_csv_1(school_year, temp, school_year->current_semester);
-            delete[] school_year->data_classes[i].data_student;
-        }
-        delete[] school_year->data_classes;
-    }*/
+
     for (int k = 0; k < systems.year_num; k++)
     {
         for (int i = 0; i < systems.data_schoolyear[k].semester_capacity; i++)
@@ -659,7 +658,6 @@ int main()
         }
         delete[] systems.data_schoolyear->data_semester;
     }
-    // delete school_year;
     delete[] systems.data_schoolyear;
     print_in_file(accHead);
     deleteall(accHead);
