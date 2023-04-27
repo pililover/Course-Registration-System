@@ -10,7 +10,7 @@ using namespace std;
 
 struct Student
 {
-    string student_num; // so thu tu cua tung hoc sinh
+    string student_num; 
     string studentID;
     string firstname;
     string lastname;
@@ -35,7 +35,7 @@ struct Course
     string day_of_week;
     string session;
     Student *enrolled_student;
-    int size_student = 0; // so luong hoc sinh
+    int size_student = 0; 
     int capacity_student = 0;
     float percent_other = 0;
     float percent_midterm = 0;
