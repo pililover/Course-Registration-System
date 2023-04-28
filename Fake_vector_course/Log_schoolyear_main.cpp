@@ -149,7 +149,8 @@ int main()
                     {
                         system("CLEAR");
                         cout << "School year: ";
-                        cin >> year_name;
+                        cin.ignore();
+                        getline(cin, year_name);
                         create_school_year(systems, year_name);
                         school_year = &(systems.data_schoolyear[systems.year_num - 1]);
                         break;
