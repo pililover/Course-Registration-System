@@ -227,11 +227,11 @@ void change_password(node *accHead, string u_name, string &pass)
     }
 }
 
-void set_color(int code)
+/*void set_color(int code)
 {
     HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(color, code);
-}
+}*/
 /*Code
 0 = Black       8 = Gray
 1 = Blue        9 = Light Blue

@@ -10,19 +10,28 @@ void view_class_in_schoolyear(System system)
 
 	string yearname;
 	SchoolYear *school_year = NULL;
-	cout << "School year: ";
-	cin >> yearname;
+	// cout << "School year: ";
+	// cin >> yearname;
+
 	do
 	{
+		cout << "School year: ";
+		cin >> yearname;
+		int check = 0;
 		for (int i = 0; i < system.year_num; i++)
 		{
 			if (system.data_schoolyear[i].year_name == yearname)
+			{
+				check = 1;
 				school_year = &(system.data_schoolyear[i]);
+				break;
+			}
 		}
-		if (!school_year)
+		if (check == 1)
+			break;
+		if (check == 0)
 		{
-			cout << "Not found. Please choose a different school year: ";
-			cin >> yearname;
+			cout << "Not found. Please choose a different school year: " << endl;
 		}
 	} while (!school_year);
 	if (check_class_is_empty(school_year))
