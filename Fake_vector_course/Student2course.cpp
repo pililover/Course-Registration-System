@@ -38,6 +38,11 @@ void import_students_csv_to_course(SchoolYear *&school_year, string filename, st
         getline(in, tmp.gender, ',');
         getline(in, tmp.birthday, ',');
         getline(in, tmp.socialID, '\n');
+        tmp.score = -1; // To check if there are no score
+        tmp.final = -1;
+        tmp.midterm = -1;
+        tmp.other = -1;
+        tmp.gpa_4_year = 0;
         push_back_student_to_course(arr, tmp);
     }
     in.close();
@@ -61,6 +66,7 @@ void input_student_to_course(SchoolYear *&school_year, string courseid)
     cout << "Student ID: ";
     cin >> tmp.studentID;
     cout << "First name: ";
+    cin.ignore();
     getline(cin, tmp.firstname);
     cout << "Last name: ";
     getline(cin, tmp.lastname);
@@ -70,6 +76,11 @@ void input_student_to_course(SchoolYear *&school_year, string courseid)
     cin >> tmp.birthday;
     cout << "Social ID: ";
     cin >> tmp.socialID;
+    tmp.score = -1; // To check if there are no score
+    tmp.final = -1;
+    tmp.midterm = -1;
+    tmp.other = -1;
+    tmp.gpa_4_year = 0;
     push_back_student_to_course(arr, tmp);
 }
 
@@ -78,22 +89,4 @@ bool check_course_is_empty(SchoolYear *school_year)
     if (school_year->data_semester[school_year->current_semester].course_num == 0)
         return true;
     return false;
-}
-
-void view_student_in_course(SchoolYear *school_year)
-{
-    for (int i = 0; i < school_year->data_semester[school_year->current_semester].course_num; i++)
-    {
-        cout << school_year->data_semester[school_year->current_semester].data_course[i].course_id << " - "
-             << school_year->data_semester[school_year->current_semester].data_course[i].course_name << endl;
-        if (school_year->data_semester[school_year->current_semester].data_course[i].size_student != 0)
-        {
-            for (int j = 0; j < school_year->data_semester[school_year->current_semester].data_course[i].size_student; j++)
-            {
-                cout << school_year->data_semester[school_year->current_semester].data_course[i].enrolled_student[j].studentID << " \t"
-                     << school_year->data_semester[school_year->current_semester].data_course[i].enrolled_student[j].firstname << " \t"
-                     << school_year->data_semester[school_year->current_semester].data_course[i].enrolled_student[j].lastname << endl;
-            }
-        }
-    }
 }

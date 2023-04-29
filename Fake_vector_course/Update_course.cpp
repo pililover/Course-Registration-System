@@ -18,6 +18,8 @@ void update_course(Course *&update, SchoolYear *&year)
         cout << "Enter 9 to add a student to course." << endl;
         cout << "Enter 10 to remove a student from course." << endl;
         cout << "Enter 11 to remove course." << endl;
+        cout << "Enter 0 to exit." << endl;
+        cout << "Option: ";
         cin >> flag;
         string temp_remove;
         switch (flag)
@@ -77,19 +79,20 @@ void update_course(Course *&update, SchoolYear *&year)
             int stop = 1;
             while (x < update->size_student - 1 && stop != 0)
             {
-                x++;
                 if (update->enrolled_student[x].studentID == temp_remove)
                 {
                     stop = 0;
-                    for (int n = x; n < update->size_student; n++)
+                    for (int n = x; n < update->size_student - 1; n++)
                     {
                         update->enrolled_student[n] = update->enrolled_student[n + 1];
                     }
+                    break;
                 }
+                x++;
             }
-            if (x == update->size_student - 1)
+            if (x == update->size_student - 1 && update->enrolled_student[x].studentID == temp_remove)
             {
-                update->enrolled_student[update->size_student - 1].studentID = "0";
+                update->enrolled_student[x].studentID = "0";
                 stop = 0;
             }
             if (stop == 0)
@@ -115,7 +118,7 @@ void update_course(Course *&update, SchoolYear *&year)
                 }
             }
             delete[] year->data_semester[year->current_semester].data_course[year->data_semester[year->current_semester].course_capacity - 1].enrolled_student;
-            update->course_id = "0";
+            year->data_semester[year->current_semester].data_course[year->data_semester[year->current_semester].course_capacity - 1].course_id = "0";
             year->data_semester[year->current_semester].course_num--;
             cout << "Course has been deleted";
             flag = 0;

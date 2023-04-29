@@ -56,6 +56,15 @@ user *register_acc()
     cin >> acc->username;
     cout << "Password (Do not have space character): " << endl;
     cin >> acc->password;
+    if (acc->type_of_user == 1)
+    {
+        cout << "Student ID (Do not have space character): " << endl;
+        cin >> acc->ID;
+    }
+    else
+    {
+        acc->ID = "No_ID";
+    }
     return acc;
 }
 
@@ -73,7 +82,8 @@ void read_file_acc(node *&accHead)
         getline(inp, u_type, ',');
         already_acc->type_of_user = stoi(u_type);
         getline(inp, already_acc->username, ',');
-        getline(inp, already_acc->password, '\n');
+        getline(inp, already_acc->password, ',');
+        getline(inp, already_acc->ID, '\n');
 
         node *temp = createnode(already_acc);
 
@@ -108,7 +118,7 @@ int check_available_acc(node *accHead, user *newacc)
     return 0;
 }
 
-int check_login(node *accHead, string &u_name, string &pass, int &usertype)
+int check_login(node *accHead, string &u_name, string &pass, int &usertype, string &ID)
 {
     node *p = accHead;
     while (p != nullptr)
@@ -116,6 +126,7 @@ int check_login(node *accHead, string &u_name, string &pass, int &usertype)
         if (p->data->username == u_name && p->data->password == pass)
         {
             usertype = p->data->type_of_user;
+            ID = p->data->ID;
             return 1;
         }
         p = p->next;
@@ -123,16 +134,16 @@ int check_login(node *accHead, string &u_name, string &pass, int &usertype)
     return 0;
 }
 
-void login(node *accHead, string &u_name, string &pass, int &usertype, int &access)
+void login(node *accHead, string &u_name, string &pass, int &usertype, int &access, string &ID)
 {
     cout << "Username: ";
     cin >> u_name;
     cout << "Password: ";
     cin >> pass;
-    if (check_login(accHead, u_name, pass, usertype))
+    if (check_login(accHead, u_name, pass, usertype, ID))
     {
         cout << "Log in succefully!" << endl;
-		access = 1;
+        access = 1;
     }
     else
     {
@@ -147,18 +158,15 @@ void print_in_file(node *accHead)
     while (accHead != nullptr)
     {
         ip << accHead->data->fullname << ',';
-        /*if (head->data->type_of_user == 0)
-            ip << "STAFF" << endl;
-        else
-            ip << "STUDENT" << endl;*/
         ip << accHead->data->type_of_user << ',';
         ip << accHead->data->username << ',';
-        ip << accHead->data->password << endl;
+        ip << accHead->data->password << ',';
+        ip << accHead->data->ID << endl;
         accHead = accHead->next;
     }
+    ip.close();
     remove("account.csv");
     rename("new_update_acc.csv", "account.csv");
-    ip.close();
 }
 
 void deleteall(node *&accHead)
@@ -187,6 +195,7 @@ void display_profile(node *accHead, string u_name, string pass) // đợi lúc c
                 cout << "STUDENT" << endl;
             cout << "Username: " << accHead->data->username << endl;
             cout << "Password: " << accHead->data->password << endl;
+            cout << "ID: " << accHead->data->ID << endl;
         }
         accHead = accHead->next;
     }
@@ -217,3 +226,19 @@ void change_password(node *accHead, string u_name, string &pass)
         p = p->next;
     }
 }
+
+/*void set_color(int code)
+{
+    HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(color, code);
+}*/
+/*Code
+0 = Black       8 = Gray
+1 = Blue        9 = Light Blue
+2 = Green      10 = Light Green
+3 = Aqua       11 = Light Aqua
+4 = Red        12 = Light Red
+5 = Purple     13 = Light Purple
+6 = Yellow     14 = Light Yellow
+7 = White      15 = Bright White
+*/
