@@ -18,6 +18,7 @@ void update_course(Course *&update, SchoolYear *&year)
         cout << "Enter 9 to add a student to course." << endl;
         cout << "Enter 10 to remove a student from course." << endl;
         cout << "Enter 11 to remove course." << endl;
+        cout << "Enter 12 to view course information." << endl; // "Enter 12 to view course information.
         cout << "Enter 0 to exit." << endl;
         cout << "Option: ";
         cin >> flag;
@@ -31,7 +32,8 @@ void update_course(Course *&update, SchoolYear *&year)
 
         case 2:
             cout << "Enter the new course name: ";
-            cin >> update->course_name;
+            cin.ignore();
+            getline(cin, update->course_name);
             break;
 
         case 3:
@@ -41,7 +43,8 @@ void update_course(Course *&update, SchoolYear *&year)
 
         case 4:
             cout << "Enter the new teacher name: ";
-            cin >> update->teacher_name;
+            cin.ignore();
+            getline(cin, update->teacher_name);
             break;
 
         case 5:
@@ -123,7 +126,19 @@ void update_course(Course *&update, SchoolYear *&year)
             cout << "Course has been deleted";
             flag = 0;
             break;
-
+        case 12:
+        {
+            cout << "\t\t\tCOURSE INFORMATION" << endl;
+            cout << "Course ID: " << update->course_id << endl;
+            cout << "Course name: " << update->course_name << endl;
+            cout << "Class name: " << update->class_name << endl;
+            cout << "Teacher name: " << update->teacher_name << endl;
+            cout << "Credits: " << update->credits << endl;
+            cout << "Max students: " << update->size_student << endl;
+            cout << "Day of week: " << update->day_of_week << endl;
+            cout << "Session: " << update->session << endl;
+            break;
+        }
         case 0:
             cout << "Ending updating course information.";
             break;
