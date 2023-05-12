@@ -272,16 +272,7 @@ void find_score_class(string classname)
     string temp;
     cout << setw(50) << right << "Score board of class " << classname << endl;
     cout << setw(5) << left << "Num" << setw(15) << left << "Student ID" << setw(20) << left << "Student name";
-    /*getline(in, temp, ',');
-    getline(in, temp, ',');
-    getline(in, temp, ',');
-    int n = 0;
-    while (in.peek() != '\n' || in.peek() != '\r')
-    {
-        getline(in, temp, ',');
-        cout << setw(40) << left << temp;
-        n++;
-    }*/
+
     int n = 0;
     string linecourse, allcourse, c;
     getline(in, linecourse);

@@ -69,7 +69,7 @@ void view_course_in_schoolyear(System systems, string year_name)
     }
 }
 
-void export_student_from_course_to_file(SchoolYear *school_year, string courseid) // id của course muốn xuất danh sách học sinh nhập ở main
+void export_student_from_course_to_file(SchoolYear *school_year, string courseid) // export student from course to file
 {
     string filename;
     filename = courseid + ".csv";

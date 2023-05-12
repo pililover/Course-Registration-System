@@ -7,7 +7,7 @@
 #include <fstream>
 #include <cstdio>
 #include <sstream>
-// #include <Windows.h>
+#include <windows.h>
 
 using namespace std;
 
@@ -37,9 +37,9 @@ int check_login(node *accHead, string &u_name, string &pass, int &usertype, stri
 void login(node *accHead, string &u_name, string &pass, int &usertype, int &access, string &ID);
 void print_in_file(node *accHead);
 void deleteall(node *&accHead);
-void display_profile(node *accHead, string u_name, string pass); 
+void display_profile(node *accHead, string u_name, string pass);
 void change_password(node *accHead, string u_name, string &pass);
 
-// void set_color(int code);
+void set_color(int code);
 
 #endif
