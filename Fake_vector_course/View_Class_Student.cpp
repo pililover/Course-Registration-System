@@ -10,9 +10,6 @@ void view_class_in_schoolyear(System system)
 
 	string yearname;
 	SchoolYear *school_year = NULL;
-	// cout << "School year: ";
-	// cin >> yearname;
-
 	do
 	{
 		cout << "School year: ";
