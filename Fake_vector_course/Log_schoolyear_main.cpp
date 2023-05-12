@@ -25,7 +25,7 @@ int main()
             {
                 set_color(14);
                 cout << setw(120) << setfill('-') << endl;
-                cout << setw(50) << setfill(' ') << (char)1 << " WELCOME TO LOGIN PAGE " << (char)1 << endl;
+                cout << setfill(' ') << setw(50) << right << (char)1 << " WELCOME TO LOGIN PAGE " << (char)1 << endl;
                 cout << "1. Register" << endl;
                 cout << "2. Log in" << endl;
                 cout << "0. Exit" << endl;
@@ -79,12 +79,12 @@ int main()
             {
                 set_color(14);
                 cout << setw(120) << setfill('-') << endl;
-                cout << setw(50) << setfill(' ') << (char)21 << " HOME PAGE " << (char)21 << endl;
+                cout << setfill(' ') << setw(50) << right << (char)21 << " HOME PAGE " << (char)21 << endl;
                 set_color(3);
                 cout << "3. View profile" << endl;
                 cout << "4. Change password" << endl;
                 cout << "5. Log out" << endl;
-                cout << setfill((char)4) << setw(20) << (char)4 << endl;
+                cout << setfill((char)4) << setw(30) << (char)4 << endl;
                 cout << endl;
                 if (usertype == 0)
                 {
@@ -93,6 +93,7 @@ int main()
                     cout << "7. Add class to current school year" << endl;
                     cout << "8. Add new student to class" << endl;
                     cout << "9. Import students from csv file to class in current school year" << endl;
+                    cout << setfill((char)4) << setw(30) << (char)4 << endl;
                     cout << endl;
                     set_color(9);
                     cout << "10. Create semester" << endl;
@@ -100,25 +101,30 @@ int main()
                     cout << "12. Add a student to the course" << endl;
                     cout << "13. Upload CSV file of enrolled students to course" << endl;
                     cout << "14. Update course information " << endl;
+                    cout << setfill((char)4) << setw(30) << (char)4 << endl;
                     cout << endl;
                     set_color(15);
                     cout << "15. View list of class" << endl;
                     cout << "16. View student in a class" << endl;
+                    cout << setfill((char)4) << setw(30) << (char)4 << endl;
                     cout << endl;
                     set_color(2);
                     cout << "17. View list of courses in current semester" << endl;
                     cout << "18. View list of courses in a school year" << endl;
                     cout << "19. View list of students in a course" << endl;
                     cout << "20. Export list of students in a course to CSV file" << endl;
+                    cout << setfill((char)4) << setw(30) << (char)4 << endl;
                     cout << endl;
                     set_color(10);
                     cout << "21. Import scoreboard of a course" << endl;
                     cout << "22. View scoreboard of a course" << endl;
                     cout << "23. Update student's result" << endl;
+                    cout << setfill((char)4) << setw(30) << (char)4 << endl;
                     cout << endl;
                     set_color(11);
                     cout << "24. View the scoreboard of a class, including final marks of all courses in the semester, GPA in this semester, and the overall GPA" << endl;
                     cout << "0. Exit" << endl;
+                    cout << setfill((char)4) << setw(30) << (char)4 << setfill(' ') << endl;
                     set_color(12);
                     cout << "OPTION: ";
                     cin >> op2;
@@ -575,6 +581,7 @@ int main()
                     cout << "6. View student own registered courses" << endl;
                     cout << "7. View student own scoreboard (after the scoreboard has been published)" << endl;
                     cout << "0. Exit" << endl;
+                    cout << setfill((char)4) << setw(30) << (char)4 << setfill(' ') << endl;
                     set_color(12);
                     cout << "OPTION: ";
                     cin >> op2;
@@ -583,6 +590,7 @@ int main()
                     {
                     case 3:
                     {
+                        system("CLEAR");
                         display_profile(accHead, u_name, pass);
                         break;
                     }
