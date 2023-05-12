@@ -51,9 +51,8 @@ void push_back_schoolyear(System &arr, SchoolYear *value)
 
 void create_school_year(System &system, string year_name)
 {
-    // SchoolYear *schoolyear = new SchoolYear;
     SchoolYear *new_school_year = nullptr;
-    init_school_year(new_school_year); // mowis theem
+    init_school_year(new_school_year);
     new_school_year->year_name = year_name;
     push_back_schoolyear(system, new_school_year);
     cout << "Current school year " << system.data_schoolyear[system.year_num - 1].year_name << endl;
@@ -63,11 +62,10 @@ void push_back_class(SchoolYear *&arr, Classes *value)
 {
     if (arr->class_num == arr->class_capacity)
     {
-        int new_capacity = arr->class_capacity + 5; // just add one class
+        int new_capacity = arr->class_capacity + 5;
         resize_school_year(arr, new_capacity);
     }
     arr->data_classes[arr->class_num] = Classes(*value);
-    // move it, not the copy of it
     arr->class_num++;
 }
 
