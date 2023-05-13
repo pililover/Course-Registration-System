@@ -242,7 +242,8 @@ int main()
                         cout << "Course id: ";
                         cin >> temp.course_id;
                         cout << "Course name: ";
-                        cin >> temp.course_name;
+                        cin.ignore();
+                        getline(cin,temp.course_name);
                         cout << "Class name: ";
                         cin >> temp.class_name;
                         cout << "Teacher name: ";
