@@ -172,17 +172,15 @@ void find_score_student(string classname, string ID)
     while (!in.eof())
     {
         getline(in, temp);
-        // getline(in, temp, ',');
         if (temp.find(ID) <= temp.length())
         {
             exist = 1;
             break;
         }
-        // getline(in, temp);
         pos++;
     }
     in.close();
-    // cout << pos << endl;
+
     if (exist == 0)
     {
         cout << "This ID does not exist in this class" << endl;
@@ -196,10 +194,9 @@ void find_score_student(string classname, string ID)
         {
             getline(in1, temp);
         }
-        // cout << temp << endl;
+
         getline(in1, temp, ',');
         temp = temp.substr(0, temp.find(',') - 1);
-        // cout << setw(5) << left << temp;
         getline(in1, temp, ',');
         temp = temp.substr(0, temp.find(',') - 1);
         cout << setw(20) << left << "Student ID: " << temp << endl;
@@ -210,12 +207,11 @@ void find_score_student(string classname, string ID)
         in1.seekg(0, ios::beg);
         string linecourse, allcourse, scoretype, c;
         getline(in1, linecourse);
-        // int posaftercoursename = in1.tellg();
 
         getline(in1, scoretype, '\n');
         cout << scoretype << endl;
         cout << pos << endl;
-        for (int i = 1; i <= pos; i++) //-1 because of 2 lines
+        for (int i = 1; i <= pos; i++)
         {
             string t;
             getline(in1, t);
@@ -228,10 +224,7 @@ void find_score_student(string classname, string ID)
         allcourse = linecourse.substr(posx, linecourse.length() - posx);
         c = allcourse.substr(0, allcourse.find(','));
         n = 0;
-        // cout << linecourse << endl;
-        // cout << allcourse << endl;
-        // cout << c << endl;
-        //  cout << c.length() << endl;
+
         cout << setw(40) << left << "Course name";
         cout << setw(10) << left << "Other" << setw(13) << left << "Mid term" << setw(10) << left << "Final" << setw(10) << left << "Total" << endl;
         int len = c.length();
@@ -240,11 +233,8 @@ void find_score_student(string classname, string ID)
             cout << setw(40) << left << c;
             allcourse = allcourse.substr(allcourse.find(c) + c.length() + 1);
             c = allcourse.substr(0, allcourse.find(','));
-            // cout << allcourse << endl;
             len = c.length();
-            // cout << len << endl;
-            //  cout << setw(10) << left << "Other" << setw(13) << left << "Mid term" << setw(10) << left << "Final" << setw(10) << left << "Total" << endl;
-            //    cout << setw(40) << left << setfill(' ');
+
             getline(in1, temp, ',');
             temp = temp.substr(0, temp.find(',') - 1);
             cout << setw(10) << left << temp;
@@ -266,11 +256,6 @@ void find_score_student(string classname, string ID)
             cout << "No course" << endl;
             return;
         }
-        // getline(in1, temp);
-        // cout << setw(40) << left << "Score type";
-        //  for (int i = 0; i < n; i++)
-        //{
-        // }
 
         cout << setw(10) << left << "GPA";
         cout << setw(10) << left << "Overall GPA" << endl;
