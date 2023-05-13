@@ -189,7 +189,7 @@ void find_score_student(string classname, string ID)
     {
         ifstream in1(class_old);
         int n = 0;
-        cout << pos << endl;
+
         for (int i = 1; i <= 2 + pos; i++)
         {
             getline(in1, temp);
@@ -209,8 +209,7 @@ void find_score_student(string classname, string ID)
         getline(in1, linecourse);
 
         getline(in1, scoretype, '\n');
-        cout << scoretype << endl;
-        cout << pos << endl;
+
         for (int i = 1; i <= pos; i++)
         {
             string t;
