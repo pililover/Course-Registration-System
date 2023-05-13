@@ -218,8 +218,7 @@ void find_score_student(string classname, string ID)
         {
             cout << setw(10) << left << "Other" << setw(10) << left << "Mid term" << setw(10) << left << "Final" << setw(10) << left << "Total";
         }
-        cout << setw(10) << left << "GPA";
-        cout << setw(10) << left << "Overall GPA" << endl;
+
         for (int i = 1; i < pos; i++)
         {
             getline(in1, temp);
@@ -248,6 +247,8 @@ void find_score_student(string classname, string ID)
             temp = temp.substr(0, temp.find(',') - 1);
             cout << setw(10) << left << temp;
         }
+        cout << setw(10) << left << "GPA";
+        cout << setw(10) << left << "Overall GPA" << endl;
         getline(in1, temp, ',');
         temp = temp.substr(0, temp.find(',') - 1);
         cout << setw(10) << left << temp;
