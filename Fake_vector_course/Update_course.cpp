@@ -147,6 +147,7 @@ void update_course(Course *&update, SchoolYear *&year)
             cout << "Invalid input! Please enter an option.";
             break;
         }
+        cout << endl;
         system("pause");
         cout << endl;
     }
